@@ -1,0 +1,143 @@
+{
+	"admin_title": ["Admin-Panel", "Admin Panel", "Admin Paneli"],
+	"admin_dashboard": ["Dashboard", "Dashboard", "Gösterge Paneli"],
+	"admin_products": ["Produkte", "Products", "Ürünler"],
+	"admin_orders": ["Bestellungen", "Orders", "Siparişler"],
+	"admin_new_product": ["Neues Produkt", "New product", "Yeni ürün"],
+	"admin_edit_product": ["Produkt bearbeiten", "Edit product", "Ürünü düzenle"],
+	"admin_product_name": ["Produktname", "Product name", "Ürün adı"],
+	"admin_product_price": ["Preis (in Euro)", "Price (in Euro)", "Fiyat (Euro)"],
+	"admin_product_active": [
+		"Aktiv (sichtbar im Shop)",
+		"Active (visible in shop)",
+		"Aktif (mağazada görünür)"
+	],
+	"admin_product_saved": ["Produkt gespeichert.", "Product saved.", "Ürün kaydedildi."],
+	"admin_product_deleted": ["Produkt gelöscht.", "Product deleted.", "Ürün silindi."],
+	"admin_order_detail": ["Bestelldetails", "Order details", "Sipariş detayları"],
+	"admin_order_status": ["Status", "Status", "Durum"],
+	"admin_order_status_pending": ["Offen", "Pending", "Bekliyor"],
+	"admin_order_status_confirmed": ["Bestätigt", "Confirmed", "Onaylandı"],
+	"admin_order_status_shipped": ["Versendet", "Shipped", "Gönderildi"],
+	"admin_order_status_delivered": ["Geliefert", "Delivered", "Teslim edildi"],
+	"admin_order_status_cancelled": ["Storniert", "Cancelled", "İptal edildi"],
+	"admin_payment_status": ["Zahlungsstatus", "Payment status", "Ödeme durumu"],
+	"admin_payment_pending": ["Ausstehend", "Pending", "Bekliyor"],
+	"admin_payment_paid": ["Bezahlt", "Paid", "Ödendi"],
+	"admin_login": ["Anmelden", "Sign in", "Giriş yap"],
+	"admin_logout": ["Abmelden", "Sign out", "Çıkış yap"],
+	"admin_username": ["Benutzername", "Username", "Kullanıcı adı"],
+	"admin_password": ["Passwort", "Password", "Şifre"],
+	"admin_login_error": [
+		"Ungültige Anmeldedaten.",
+		"Invalid credentials.",
+		"Geçersiz giriş bilgileri."
+	],
+	"admin_total_orders": ["Bestellungen gesamt", "Total orders", "Toplam sipariş"],
+	"admin_total_revenue": ["Umsatz gesamt", "Total revenue", "Toplam gelir"],
+	"admin_recent_orders": ["Neueste Bestellungen", "Recent orders", "Son siparişler"],
+	"admin_view_shop": ["Shop ansehen", "View shop", "Mağazayı görüntüle"],
+	"admin_image": ["Bild", "Image", "Görsel"],
+	"admin_active": ["Aktiv", "Active", "Aktif"],
+	"admin_inactive": ["Inaktiv", "Inactive", "Pasif"],
+	"admin_no_category": ["- Keine Kategorie -", "- No category -", "- Kategori yok -"],
+	"admin_image_url": ["Bild-URL", "Image URL", "Görsel URL"],
+	"admin_confirm_delete_product": [
+		"Produkt wirklich löschen?",
+		"Really delete this product?",
+		"Ürün gerçekten silinsin mi?"
+	],
+	"admin_payment_failed_status": ["Fehlgeschlagen", "Failed", "Başarısız"],
+	"admin_payment_refunded": ["Erstattet", "Refunded", "İade edildi"],
+	"admin_customer": ["Kunde", "Customer", "Müşteri"],
+	"admin_details": ["Details", "Details", "Detaylar"],
+	"admin_allergens": ["Allergene (EU-LMIV)", "Allergens (EU-LMIV)", "Alerjenler (AB-LMIV)"],
+	"admin_ingredients": ["Zutaten", "Ingredients", "İçindekiler"],
+	"admin_nutrition_per_100g": [
+		"Nährwerte pro 100 g",
+		"Nutrition per 100 g",
+		"100 g başına besin değerleri"
+	],
+	"admin_shelf_life": ["Mindesthaltbarkeit (Monate)", "Shelf life (months)", "Raf ömrü (ay)"],
+	"admin_storage": ["Lagerungshinweis", "Storage instructions", "Saklama talimatları"],
+	"admin_tracking_number": ["Trackingnummer", "Tracking number", "Takip numarası"],
+	"admin_internal_notes": [
+		"Interne Notizen (nur Admin)",
+		"Internal notes (admin only)",
+		"Dahili notlar (sadece admin)"
+	],
+	"admin_export_csv": ["CSV exportieren", "Export CSV", "CSV olarak indir"],
+	"admin_original_price": [
+		"Streichpreis (€, leer = kein Rabatt)",
+		"Original price (€, empty = no discount)",
+		"İndirim öncesi fiyat (€, boş = indirim yok)"
+	],
+	"admin_origin_region": [
+		"Herkunftsregion (z.B. Istanbul)",
+		"Origin region (e.g. Istanbul)",
+		"Menşei bölge (örn. İstanbul)"
+	],
+	"admin_pairing": ["Genussempfehlung", "Pairing suggestion", "Eşleştirme önerisi"],
+	"admin_stock_quantity": [
+		"Lagerbestand (leer = unbegrenzt)",
+		"Stock quantity (empty = unlimited)",
+		"Stok miktarı (boş = sınırsız)"
+	],
+	"admin_additional_images": [
+		"Weitere Bild-URLs (eine pro Zeile)",
+		"Additional image URLs (one per line)",
+		"Ek görsel URL'leri (her satıra bir tane)"
+	],
+	"admin_page": ["Seite", "Page", "Sayfa"],
+	"admin_of": ["von", "of", "/"],
+	"admin_notes_saved": ["Notiz gespeichert.", "Note saved.", "Not kaydedildi."],
+
+	"admin_tags": ["Badges / Tags", "Badges / Tags", "Rozetler / Etiketler"],
+	"admin_tag_halal": ["Halal", "Halal", "Helal"],
+	"admin_tag_vegan": ["Vegan", "Vegan", "Vegan"],
+	"admin_tag_glutenfrei": ["Glutenfrei", "Gluten-free", "Glutensiz"],
+	"admin_tag_nussfrei": ["Nussfrei", "Nut-free", "Fındıksız"],
+	"admin_tag_bestseller": ["Bestseller", "Bestseller", "Çok satan"],
+	"admin_tag_neu": ["Neu", "New", "Yeni"],
+	"admin_tag_saisonal": ["Saisonal", "Seasonal", "Mevsimlik"],
+
+	"admin_customers": ["Kunden", "Customers", "Müşteriler"],
+	"admin_customer_name": ["Name", "Name", "İsim"],
+	"admin_customer_email": ["E-Mail", "Email", "E-posta"],
+	"admin_customer_registered": ["Registriert", "Registered", "Kayıt tarihi"],
+	"admin_customer_orders": ["Bestellungen", "Orders", "Siparişler"],
+	"admin_customer_revenue": ["Umsatz", "Revenue", "Gelir"],
+	"admin_customer_blocked": ["Gesperrt", "Blocked", "Engellenmiş"],
+	"admin_block_customer": ["Sperren", "Block", "Engelle"],
+	"admin_unblock_customer": ["Entsperren", "Unblock", "Engeli kaldır"],
+	"admin_customer_blocked_msg": ["Konto gesperrt.", "Account blocked.", "Hesap engellendi."],
+	"admin_customer_unblocked_msg": [
+		"Konto entsperrt.",
+		"Account unblocked.",
+		"Hesap engeli kaldırıldı."
+	],
+
+	"admin_testimonials": ["Kundenstimmen", "Testimonials", "Müşteri yorumları"],
+	"admin_testimonial_name": ["Name", "Name", "İsim"],
+	"admin_testimonial_location": ["Ort (optional)", "Location (optional)", "Konum (isteğe bağlı)"],
+	"admin_testimonial_text": ["Zitat", "Quote", "Alıntı"],
+	"admin_testimonial_rating": ["Bewertung (1-5)", "Rating (1-5)", "Puan (1-5)"],
+	"admin_testimonial_saved": ["Gespeichert.", "Saved.", "Kaydedildi."],
+	"admin_testimonial_deleted": ["Gelöscht.", "Deleted.", "Silindi."],
+	"admin_new_testimonial": ["Neue Kundenstimme", "New testimonial", "Yeni müşteri yorumu"],
+	"admin_edit_testimonial": [
+		"Kundenstimme bearbeiten",
+		"Edit testimonial",
+		"Müşteri yorumunu düzenle"
+	],
+	"admin_confirm_delete_testimonial": [
+		"Kundenstimme wirklich löschen?",
+		"Really delete this testimonial?",
+		"Müşteri yorumu gerçekten silinsin mi?"
+	],
+
+	"admin_filter_from": ["Von", "From", "Başlangıç"],
+	"admin_filter_to": ["Bis", "To", "Bitiş"],
+	"admin_filter_apply": ["Filtern", "Apply filter", "Filtrele"],
+	"admin_sort_order": ["Reihenfolge", "Sort order", "Sıralama"]
+}

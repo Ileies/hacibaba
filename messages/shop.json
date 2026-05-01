@@ -1,0 +1,469 @@
+{
+	"shop_title": ["Hacibaba", "Hacibaba", "Hacibaba"],
+	"shop_tagline": [
+		"Authentisches Lokum aus der Türkei seit 1988",
+		"Authentic Turkish Lokum since 1988",
+		"1988'den beri Türkiye'den Geleneksel Lokum"
+	],
+	"shop_add_to_cart": ["In den Warenkorb", "Add to cart", "Sepete ekle"],
+	"shop_added_to_cart": ["In den Warenkorb gelegt", "Added to cart", "Sepete eklendi"],
+	"shop_cart": ["Warenkorb", "Cart", "Sepet"],
+	"shop_cart_empty": ["Ihr Warenkorb ist leer.", "Your cart is empty.", "Sepetiniz boş."],
+	"shop_checkout": ["Zur Kasse", "Checkout", "Ödemeye geç"],
+	"shop_continue_shopping": ["Weiter einkaufen", "Continue shopping", "Alışverişe devam et"],
+	"shop_price": ["Preis", "Price", "Fiyat"],
+	"shop_quantity": ["Menge", "Quantity", "Adet"],
+	"shop_subtotal": ["Zwischensumme", "Subtotal", "Ara toplam"],
+	"shop_shipping_cost": ["Versandkosten", "Shipping cost", "Kargo ücreti"],
+	"shop_free_shipping": ["Kostenloser Versand", "Free shipping", "Ücretsiz kargo"],
+	"shop_total": ["Gesamt", "Total", "Toplam"],
+	"shop_order": ["Bestellung", "Order", "Sipariş"],
+	"shop_order_number": ["Bestellnummer", "Order number", "Sipariş numarası"],
+	"shop_place_order": ["Bestellung aufgeben", "Place order", "Sipariş ver"],
+	"shop_order_confirmed": ["Bestellung bestätigt!", "Order confirmed!", "Sipariş onaylandı!"],
+	"shop_order_confirmed_desc": [
+		"Vielen Dank! Wir haben Ihre Bestellung erhalten und senden Ihnen eine Bestätigung per E-Mail.",
+		"Thank you! We have received your order and will send you a confirmation by email.",
+		"Teşekkürler! Siparişinizi aldık, e-posta ile onay göndereceğiz."
+	],
+	"shop_product": ["Produkt", "Product", "Ürün"],
+	"shop_products": ["Produkte", "Products", "Ürünler"],
+	"shop_out_of_stock": ["Nicht verfügbar", "Out of stock", "Stok yok"],
+	"shop_weight": ["Gewicht", "Weight", "Ağırlık"],
+	"shop_free_shipping_notice": [
+		"Ab {threshold} kostenloser Versand",
+		"Free shipping from {threshold}",
+		"{threshold} üzeri ücretsiz kargo"
+	],
+	"shop_name": ["Name", "Name", "İsim"],
+	"shop_first_name": ["Vorname", "First name", "Ad"],
+	"shop_last_name": ["Nachname", "Last name", "Soyad"],
+	"shop_email": ["E-Mail-Adresse", "Email address", "E-posta adresi"],
+	"shop_phone": ["Telefonnummer", "Phone number", "Telefon numarası"],
+	"shop_street": ["Straße und Hausnummer", "Street and house number", "Sokak ve kapı numarası"],
+	"shop_city": ["Stadt", "City", "Şehir"],
+	"shop_zip": ["Postleitzahl", "ZIP code", "Posta kodu"],
+	"shop_state": ["Bundesland", "State", "Eyalet"],
+	"shop_country": ["Land", "Country", "Ülke"],
+	"shop_shipping_address": ["Lieferadresse", "Shipping address", "Teslimat adresi"],
+	"shop_same_billing": [
+		"Rechnungsadresse entspricht Lieferadresse",
+		"Billing address same as shipping",
+		"Fatura adresi teslimat adresiyle aynı"
+	],
+	"shop_notes": ["Anmerkungen zur Bestellung", "Order notes", "Sipariş notu"],
+	"shop_payment_method": ["Zahlungsart", "Payment method", "Ödeme yöntemi"],
+	"shop_sort_by": ["Sortieren nach", "Sort by", "Sıralama"],
+	"shop_sort_price_asc": ["Preis aufsteigend", "Price: low to high", "Fiyat: düşükten yükseğe"],
+	"shop_sort_price_desc": ["Preis absteigend", "Price: high to low", "Fiyat: yüksekten düşüğe"],
+	"shop_sort_name": ["Name", "Name", "İsim"],
+	"shop_payment": ["Zahlung", "Payment", "Ödeme"],
+	"shop_payment_details": ["Zahlungsdetails", "Payment details", "Ödeme detayları"],
+	"shop_to_payment": ["Weiter zur Zahlung", "Proceed to payment", "Ödemeye geç"],
+	"shop_pay_now": ["Jetzt bezahlen", "Pay now", "Şimdi öde"],
+	"shop_back_to_shipping": [
+		"Zurück zur Lieferadresse",
+		"Back to shipping",
+		"Teslimat adresine dön"
+	],
+	"shop_since_1988": ["Seit 1988", "Since 1988", "1988'den beri"],
+	"shop_discover_all_products": [
+		"Alle Produkte entdecken",
+		"Discover all products",
+		"Tüm ürünleri keşfet"
+	],
+	"shop_featured_products": ["Ausgewählte Produkte", "Featured products", "Öne çıkan ürünler"],
+	"shop_show_all": ["Alle anzeigen", "Show all", "Tümünü göster"],
+	"shop_all_products": ["Alle Produkte", "All products", "Tüm ürünler"],
+	"shop_back_to_products": ["Zurück zu den Produkten", "Back to products", "Ürünlere geri dön"],
+	"shop_free_shipping_remaining": [
+		"Noch {amount} bis zum kostenlosen Versand.",
+		"Only {amount} more for free shipping.",
+		"Ücretsiz kargo için {amount} daha."
+	],
+	"shop_per_piece": ["/ Stk.", "/ pc.", "/ adet"],
+	"shop_login": ["Anmelden", "Sign in", "Giriş yap"],
+	"shop_login_description": [
+		"Mit Ihrem Konto anmelden oder neu registrieren",
+		"Sign in or create a new account",
+		"Hesabınıza giriş yapın veya yeni hesap oluşturun"
+	],
+	"shop_login_error": [
+		"Ungültige E-Mail-Adresse oder falsches Passwort.",
+		"Invalid email address or password.",
+		"Geçersiz e-posta adresi veya şifre."
+	],
+	"shop_continue_with_google": [
+		"Mit Google fortfahren",
+		"Continue with Google",
+		"Google ile devam et"
+	],
+	"shop_register_with_google": [
+		"Mit Google registrieren",
+		"Sign up with Google",
+		"Google ile kayıt ol"
+	],
+	"shop_register": ["Registrieren", "Register", "Kayıt ol"],
+	"shop_create_account": ["Konto erstellen", "Create account", "Hesap oluştur"],
+	"shop_register_description": [
+		"Registrieren Sie sich für ein neues Kundenkonto",
+		"Create a new customer account",
+		"Yeni bir müşteri hesabı oluşturun"
+	],
+	"shop_email_taken": [
+		"Diese E-Mail-Adresse ist bereits registriert.",
+		"This email address is already registered.",
+		"Bu e-posta adresi zaten kayıtlı."
+	],
+	"shop_fill_required_fields": [
+		"Bitte alle Felder korrekt ausfüllen.",
+		"Please fill in all fields correctly.",
+		"Lütfen tüm alanları doğru doldurun."
+	],
+	"shop_full_name": ["Vollständiger Name", "Full name", "Ad Soyad"],
+	"shop_password_min_8": ["Mindestens 8 Zeichen", "At least 8 characters", "En az 8 karakter"],
+	"shop_already_registered": [
+		"Bereits registriert?",
+		"Already registered?",
+		"Zaten kayıtlı mısınız?"
+	],
+	"shop_no_account": ["Noch kein Konto?", "No account yet?", "Henüz hesabınız yok mu?"],
+	"shop_logout": ["Abmelden", "Sign out", "Çıkış yap"],
+	"shop_my_account": ["Mein Konto", "My account", "Hesabım"],
+	"shop_my_orders": ["Meine Bestellungen", "My orders", "Siparişlerim"],
+	"shop_no_orders": [
+		"Sie haben noch keine Bestellungen aufgegeben.",
+		"You haven't placed any orders yet.",
+		"Henüz sipariş vermediniz."
+	],
+	"shop_shop_now": ["Jetzt einkaufen", "Shop now", "Şimdi alışveriş yap"],
+	"shop_order_summary": ["Bestellübersicht", "Order summary", "Sipariş özeti"],
+	"checkout_error_retry": [
+		"Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+		"An error occurred. Please try again.",
+		"Bir hata oluştu. Lütfen tekrar deneyin."
+	],
+	"checkout_payment_failed": ["Zahlung fehlgeschlagen.", "Payment failed.", "Ödeme başarısız."],
+	"footer_legal": ["Rechtliches", "Legal", "Yasal"],
+	"footer_imprint": ["Impressum", "Imprint", "Künye"],
+	"footer_privacy": ["Datenschutz", "Privacy", "Gizlilik"],
+	"footer_terms": ["AGB", "Terms", "Kullanım Koşulları"],
+	"footer_withdrawal": ["Widerrufsrecht", "Right of withdrawal", "Cayma hakkı"],
+	"footer_copyright": ["Alle Rechte vorbehalten.", "All rights reserved.", "Tüm hakları saklıdır."],
+	"footer_brand_desc": [
+		"Seit {years} Jahren stellen wir authentisches Lokum nach traditionellen Familienrezepten her - so wie es in der Türkei seit Generationen genossen wird.",
+		"For {years} years we have been crafting authentic lokum from traditional family recipes - just as enjoyed in Turkey for generations.",
+		"{years} yıldır geleneksel aile tariflerimizle otantik lokum üretiyoruz."
+	],
+	"footer_contact": ["Kontakt", "Contact", "İletişim"],
+	"footer_newsletter_heading": [
+		"Neue Sorten & Saisonales - zuerst bei Ihnen.",
+		"New varieties & seasonal specials - in your inbox first.",
+		"Yeni çeşitler ve sezonluk ürünler - önce sizde."
+	],
+	"footer_newsletter_desc": [
+		"Neue Produkte, saisonale Spezialitäten und Angebote - direkt in Ihr Postfach.",
+		"New products, seasonal specialties and offers - straight to your inbox.",
+		"Yeni ürünler, mevsimsel özellikler ve teklifler - doğrudan gelen kutunuza."
+	],
+	"footer_newsletter_placeholder": [
+		"Ihre E-Mail-Adresse",
+		"Your email address",
+		"E-posta adresiniz"
+	],
+	"footer_newsletter_cta": ["Anmelden", "Subscribe", "Abone ol"],
+	"footer_newsletter_success": [
+		"Danke! Sie sind jetzt angemeldet.",
+		"Thank you! You're now subscribed.",
+		"Teşekkürler! Artık abonesiniz."
+	],
+	"footer_newsletter_duplicate": [
+		"Diese E-Mail-Adresse ist bereits angemeldet.",
+		"This email is already subscribed.",
+		"Bu e-posta adresi zaten kayıtlı."
+	],
+	"footer_newsletter_invalid": [
+		"Bitte eine gültige E-Mail-Adresse eingeben.",
+		"Please enter a valid email address.",
+		"Lütfen geçerli bir e-posta adresi girin."
+	],
+	"shop_search_placeholder": ["Produkte suchen...", "Search products...", "Ürün ara..."],
+	"shop_search_no_results": ["Keine Produkte gefunden.", "No products found.", "Ürün bulunamadı."],
+	"shop_search_results_for": [
+		"Ergebnisse für \"{query}\"",
+		"Results for \"{query}\"",
+		"\"{query}\" için sonuçlar"
+	],
+	"shop_vat_included": ["inkl. 7 % MwSt.", "incl. 7% VAT", "% 7 KDV dahil"],
+	"shop_vat_plus_shipping": [
+		"inkl. 7 % MwSt., zzgl.",
+		"incl. 7% VAT, plus",
+		"% 7 KDV dahil, hariç"
+	],
+	"shop_shipping_costs": ["Versandkosten", "shipping costs", "kargo ücreti"],
+	"footer_shipping": ["Lieferbedingungen", "Shipping", "Teslimat koşulları"],
+
+	"cookie_banner_text": [
+		"Diese Website verwendet ausschließlich technisch notwendige Cookies für Anmeldung und Spracheinstellungen. Keine Tracking- oder Analyse-Cookies.",
+		"This website uses only technically necessary cookies for login and language settings. No tracking or analytics cookies.",
+		"Bu web sitesi yalnızca giriş ve dil ayarları için gerekli teknik çerezler kullanır."
+	],
+	"cookie_banner_accept": ["Verstanden", "Got it", "Anladım"],
+	"cookie_banner_learn_more": ["Datenschutzerklärung", "Privacy policy", "Gizlilik politikası"],
+
+	"account_delete_heading": ["Konto löschen", "Delete account", "Hesabı sil"],
+	"account_delete_warning": [
+		"Diese Aktion ist unwiderruflich. Alle persönlichen Daten werden gelöscht. Bestelldaten bleiben aus steuerlichen Gründen anonym erhalten.",
+		"This action is irreversible. All personal data will be deleted. Order data is retained anonymously for tax purposes.",
+		"Bu işlem geri alınamaz. Tüm kişisel veriler silinecektir. Sipariş verileri vergi amaçlı anonim olarak saklanır."
+	],
+	"account_delete_confirm_label": [
+		"Ja, ich möchte mein Konto und alle meine Daten unwiderruflich löschen.",
+		"Yes, I want to permanently delete my account and all my data.",
+		"Evet, hesabımı ve tüm verilerimi kalıcı olarak silmek istiyorum."
+	],
+	"account_delete_button": [
+		"Konto endgültig löschen",
+		"Delete account permanently",
+		"Hesabı kalıcı olarak sil"
+	],
+	"account_export_heading": [
+		"Meine Daten (DSGVO Art. 20)",
+		"My data (GDPR Art. 20)",
+		"Verilerimi (KVKK)"
+	],
+	"account_export_desc": [
+		"Laden Sie eine Kopie aller bei uns gespeicherten Daten herunter.",
+		"Download a copy of all your data stored with us.",
+		"Bizde saklanan tüm verilerinizin bir kopyasını indirin."
+	],
+	"account_export_button": [
+		"Daten herunterladen (JSON)",
+		"Download data (JSON)",
+		"Verileri indir (JSON)"
+	],
+
+	"footer_newsletter_check_inbox": [
+		"Fast fertig! Bitte bestätigen Sie Ihre E-Mail. Wir haben Ihnen einen Bestätigungslink geschickt.",
+		"Almost done! Please confirm your email. We've sent you a confirmation link.",
+		"Neredeyse bitti! Lütfen e-postanızı onaylayın. Size bir onay bağlantısı gönderdik."
+	],
+	"newsletter_confirm_title": ["Newsletter bestätigen", "Confirm newsletter", "Bülteni onayla"],
+	"newsletter_confirm_success": [
+		"Ihre E-Mail-Adresse wurde bestätigt. Willkommen bei unserem Newsletter!",
+		"Your email address has been confirmed. Welcome to our newsletter!",
+		"E-posta adresiniz onaylandı. Bültenimize hoş geldiniz!"
+	],
+	"newsletter_confirm_invalid": [
+		"Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+		"This confirmation link is invalid or has expired.",
+		"Bu onay bağlantısı geçersiz veya süresi dolmuş."
+	],
+
+	"product_images": ["Produktbilder", "Product images", "Ürün görselleri"],
+	"product_allergens": ["Allergene", "Allergens", "Alerjenler"],
+	"product_contains": ["Enthält", "Contains", "İçerir"],
+	"product_may_contain": ["Kann enthalten", "May contain", "İçerebilir"],
+	"product_allergen_free": [
+		"Keine allergenen Stoffe angegeben",
+		"No allergens declared",
+		"Alerjen bilgisi girilmemiş"
+	],
+	"product_ingredients": ["Zutaten", "Ingredients", "İçindekiler"],
+	"product_shelf_life": ["Mindesthaltbarkeit", "Best before", "Son kullanma tarihi"],
+	"product_shelf_life_months": [
+		"{months} Monate ab Produktion",
+		"{months} months from production",
+		"{months} ay üretimden"
+	],
+	"product_storage": ["Lagerung", "Storage", "Saklama koşulları"],
+	"product_nutrition": [
+		"Nährwerte pro 100 g",
+		"Nutrition per 100 g",
+		"100 g başına besin değerleri"
+	],
+	"product_energy": ["Brennwert", "Energy", "Enerji"],
+	"product_fat": ["Fett", "Fat", "Yağ"],
+	"product_fat_saturated": [
+		"davon gesättigte Fettsäuren",
+		"of which saturates",
+		"doymuş yağ asidi"
+	],
+	"product_carbs": ["Kohlenhydrate", "Carbohydrates", "Karbonhidrat"],
+	"product_sugar": ["davon Zucker", "of which sugars", "şeker"],
+	"product_fiber": ["Ballaststoffe", "Fibre", "Lif"],
+	"product_protein": ["Eiweiß", "Protein", "Protein"],
+	"product_salt": ["Salz", "Salt", "Tuz"],
+
+	"allergen_gluten": [
+		"Glutenhaltiges Getreide",
+		"Cereals containing gluten",
+		"Gluten içeren tahıllar"
+	],
+	"allergen_crustaceans": ["Krebstiere", "Crustaceans", "Kabuklu deniz ürünleri"],
+	"allergen_eggs": ["Eier", "Eggs", "Yumurta"],
+	"allergen_fish": ["Fisch", "Fish", "Balık"],
+	"allergen_peanuts": ["Erdnüsse", "Peanuts", "Yer fıstığı"],
+	"allergen_soybeans": ["Sojabohnen", "Soybeans", "Soya"],
+	"allergen_milk": ["Milch und Laktose", "Milk and lactose", "Süt ve laktoz"],
+	"allergen_nuts": ["Schalenfrüchte", "Tree nuts", "Kabuklu yemişler"],
+	"allergen_celery": ["Sellerie", "Celery", "Kereviz"],
+	"allergen_mustard": ["Senf", "Mustard", "Hardal"],
+	"allergen_sesame": ["Sesam", "Sesame", "Susam"],
+	"allergen_sulphites": [
+		"Schwefeldioxid und Sulfite",
+		"Sulphur dioxide and sulphites",
+		"Kükürt dioksit ve sülfitler"
+	],
+	"allergen_lupin": ["Lupinen", "Lupin", "Acı bakla"],
+	"allergen_molluscs": ["Weichtiere", "Molluscs", "Yumuşakçalar"],
+
+	"shop_forgot_password": ["Passwort vergessen?", "Forgot password?", "Şifrenizi mi unuttunuz?"],
+	"shop_reset_password": ["Passwort zurücksetzen", "Reset password", "Şifreyi sıfırla"],
+	"shop_reset_password_desc": [
+		"Geben Sie Ihre E-Mail-Adresse ein. Wir senden Ihnen einen Reset-Link.",
+		"Enter your email address. We'll send you a reset link.",
+		"E-posta adresinizi girin. Size sıfırlama linki göndereceğiz."
+	],
+	"shop_reset_email_sent": [
+		"Falls diese E-Mail-Adresse registriert ist, haben wir Ihnen einen Link zum Zurücksetzen gesendet. Bitte prüfen Sie Ihren Posteingang.",
+		"If this email is registered, we've sent you a reset link. Please check your inbox.",
+		"Bu e-posta kayıtlıysa sıfırlama linki gönderdik. Lütfen gelen kutunuzu kontrol edin."
+	],
+	"shop_new_password": ["Neues Passwort", "New password", "Yeni şifre"],
+	"shop_confirm_password": ["Passwort bestätigen", "Confirm password", "Şifreyi doğrula"],
+	"shop_password_mismatch": [
+		"Die Passwörter stimmen nicht überein.",
+		"Passwords do not match.",
+		"Şifreler eşleşmiyor."
+	],
+	"shop_reset_invalid_token": [
+		"Dieser Link ist abgelaufen oder ungültig.",
+		"This link has expired or is invalid.",
+		"Bu bağlantının süresi dolmuş veya geçersiz."
+	],
+	"shop_send_reset_link": ["Reset-Link senden", "Send reset link", "Sıfırlama linki gönder"],
+	"shop_set_new_password": ["Neues Passwort festlegen", "Set new password", "Yeni şifre belirle"],
+	"shop_reset_success": [
+		"Ihr Passwort wurde zurückgesetzt. Bitte melden Sie sich an.",
+		"Your password has been reset. Please sign in.",
+		"Şifreniz sıfırlandı. Lütfen giriş yapın."
+	],
+
+	"footer_trust_ssl": ["SSL-verschlüsselt", "SSL encrypted", "SSL şifreli"],
+	"footer_trust_stripe": ["Zahlung via Stripe", "Payment via Stripe", "Stripe ile ödeme"],
+	"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
+	"footer_trust_gogreen": [
+		"Klimaneutraler Versand",
+		"Carbon-neutral shipping",
+		"Karbon nötr kargo"
+	],
+
+	"account_password_change_heading": ["Passwort ändern", "Change password", "Şifre değiştir"],
+	"account_current_password": ["Aktuelles Passwort", "Current password", "Mevcut şifre"],
+	"account_new_password": ["Neues Passwort", "New password", "Yeni şifre"],
+	"account_confirm_password": ["Passwort bestätigen", "Confirm password", "Şifreyi onayla"],
+	"account_password_changed": [
+		"Passwort erfolgreich geändert.",
+		"Password changed successfully.",
+		"Şifre başarıyla değiştirildi."
+	],
+	"account_password_wrong": [
+		"Aktuelles Passwort ist falsch.",
+		"Current password is incorrect.",
+		"Mevcut şifre yanlış."
+	],
+	"account_password_mismatch": [
+		"Die neuen Passwörter stimmen nicht überein.",
+		"New passwords do not match.",
+		"Yeni şifreler eşleşmiyor."
+	],
+
+	"account_newsletter_heading": ["Newsletter", "Newsletter", "Bülten"],
+	"account_newsletter_on": ["Newsletter abonniert", "Subscribed to newsletter", "Bültene abone"],
+	"account_newsletter_off": [
+		"Newsletter abgemeldet",
+		"Unsubscribed from newsletter",
+		"Bülten aboneliği iptal"
+	],
+	"account_newsletter_subscribe_btn": ["Abonnieren", "Subscribe", "Abone ol"],
+	"account_newsletter_unsubscribe_btn": ["Abbestellen", "Unsubscribe", "Aboneliği iptal et"],
+
+	"account_order_details": ["Bestelldetails", "Order details", "Sipariş detayları"],
+	"account_order_track": ["Sendung verfolgen", "Track shipment", "Kargo takibi"],
+
+	"shop_gift_message": [
+		"Persönliche Nachricht / Geschenkbotschaft",
+		"Personal message / gift note",
+		"Kişisel mesaj / hediye notu"
+	],
+	"shop_gift_message_hint": [
+		"Optional - wird der Bestellung beigelegt",
+		"Optional - will be enclosed with the order",
+		"İsteğe bağlı - siparişe eklenecek"
+	],
+
+	"tag_halal": ["Halal", "Halal", "Helal"],
+	"tag_vegan": ["Vegan", "Vegan", "Vegan"],
+	"tag_glutenfrei": ["Glutenfrei", "Gluten-free", "Glutensiz"],
+	"tag_nussfrei": ["Nussfrei", "Nut-free", "Fındıksız"],
+	"tag_bestseller": ["Bestseller", "Bestseller", "Çok satan"],
+	"tag_neu": ["Neu", "New", "Yeni"],
+	"tag_saisonal": ["Saisonal", "Seasonal", "Mevsimlik"],
+
+	"shop_filter": ["Filtern", "Filter", "Filtrele"],
+	"shop_filter_all": ["Alle", "All", "Tümü"],
+	"shop_sort": ["Sortieren", "Sort", "Sırala"],
+	"shop_filter_price": ["Preisbereich", "Price range", "Fiyat aralığı"],
+	"shop_filter_tags": ["Merkmale", "Features", "Özellikler"],
+	"shop_filter_clear": ["Filter zurücksetzen", "Clear filters", "Filtreleri temizle"],
+
+	"shop_testimonials_heading": [
+		"Das sagen unsere Kunden",
+		"What our customers say",
+		"Müşterilerimiz ne diyor"
+	],
+
+	"shop_account_blocked": [
+		"Ihr Konto wurde gesperrt. Bitte kontaktieren Sie uns.",
+		"Your account has been blocked. Please contact us.",
+		"Hesabınız engellendi. Lütfen bizimle iletişime geçin."
+	],
+
+	"shop_breadcrumb_home": ["Startseite", "Home", "Ana Sayfa"],
+	"shop_breadcrumb_products": ["Produkte", "Products", "Ürünler"],
+
+	"shop_share": ["Teilen", "Share", "Paylaş"],
+	"shop_share_whatsapp": ["WhatsApp", "WhatsApp", "WhatsApp"],
+	"shop_share_copy_link": ["Link kopieren", "Copy link", "Linki kopyala"],
+	"shop_link_copied": ["Link kopiert!", "Link copied!", "Link kopyalandı!"],
+
+	"shop_nav_products": ["Produkte", "Products", "Ürünler"],
+	"shop_nav_about": ["Über uns", "About us", "Hakkımızda"],
+	"shop_nav_contact": ["Kontakt", "Contact", "İletişim"],
+	"shop_nav_faq": ["FAQ", "FAQ", "SSS"],
+
+	"shop_unit_price": ["Einzelpreis", "Unit price", "Birim fiyat"],
+	"shop_net_amount": ["Nettobetrag", "Net amount", "Net tutar"],
+	"shop_vat_7_pct": ["MwSt. 7 %", "VAT 7%", "KDV %7"],
+
+	"account_addresses_heading": ["Adressbuch", "Address book", "Adres defteri"],
+	"account_addresses_empty": [
+		"Noch keine Adressen gespeichert.",
+		"No addresses saved yet.",
+		"Henüz kayıtlı adres yok."
+	],
+	"account_address_add": ["Neue Adresse hinzufügen", "Add new address", "Yeni adres ekle"],
+	"account_address_edit": ["Adresse bearbeiten", "Edit address", "Adresi düzenle"],
+	"account_address_set_default": [
+		"Als Standard setzen",
+		"Set as default",
+		"Varsayılan olarak ayarla"
+	],
+	"account_address_default_badge": ["Standard", "Default", "Varsayılan"],
+	"account_address_label": ["Bezeichnung", "Label", "Etiket"],
+	"account_address_label_hint": ["z.B. Firma, Lager", "e.g. Office, Warehouse", "ör. Ofis, Depo"],
+	"account_address_saved": ["Adresse gespeichert.", "Address saved.", "Adres kaydedildi."],
+	"account_address_deleted": ["Adresse gelöscht.", "Address deleted.", "Adres silindi."],
+	"account_address_selector_new": ["Neue Adresse eingeben", "Enter new address", "Yeni adres gir"]
+}

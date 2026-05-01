@@ -1,0 +1,25 @@
+.*
+!.env.template
+!.prettierrc
+!.gitignore
+node_modules
+
+/build
+backups/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+!template.sqlite
+
+# Static assets not yet curated / too large for git
+/static/assets/
+/static/logo/
+/static/products/
+/static/image_1080*.webp
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Auto-generated
+src/lib/messages.ts
