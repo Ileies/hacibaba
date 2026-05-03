@@ -1,5 +1,5 @@
 <script>
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -26,7 +26,7 @@
 				{BUSINESS_CITY}<br />
 				E-Mail:
 				<a href="mailto:{EMAIL_INFO}" class="text-primary hover:underline">{EMAIL_INFO}</a><br />
-				Telefon: [TELEFONNUMMER]
+				Telefon: {PHONE_INFO}
 			</address>
 			<p class="mt-3">
 				mittels einer eindeutigen Erklärung (z.&nbsp;B. ein mit der Post versandter Brief oder eine

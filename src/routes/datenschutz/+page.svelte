@@ -1,5 +1,5 @@
 <script>
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_DATENSCHUTZ } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_DATENSCHUTZ, PHONE_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -23,7 +23,7 @@
 				<a href="mailto:{EMAIL_DATENSCHUTZ}" class="text-primary hover:underline"
 					>{EMAIL_DATENSCHUTZ}</a
 				><br />
-				Telefon: [TELEFONNUMMER]
+				Telefon: {PHONE_INFO}
 			</address>
 		</section>
 

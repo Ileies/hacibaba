@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
 	import { Button, Input, Label, Textarea } from '$lib/components/ui';
 
 	let name = $state('');
@@ -58,12 +58,12 @@
 					<p>
 						<span class="text-foreground font-medium">WhatsApp:</span>
 						<a
-							href="https://wa.me/4915123456789"
+							href="https://wa.me/{PHONE_INFO.replaceAll(/\D/g, '')}"
 							target="_blank"
 							rel="noopener noreferrer"
 							class="hover:text-primary ml-1 underline-offset-2 hover:underline"
 						>
-							+49 151 23456789
+							{PHONE_INFO}
 						</a>
 					</p>
 				</div>

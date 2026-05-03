@@ -1,5 +1,5 @@
 <script>
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -31,8 +31,8 @@
 		<section>
 			<h2 class="mb-3 text-base font-semibold">Kontakt</h2>
 			<p>
-				Telefon: <a href="tel:[TELEFONNUMMER]" class="text-primary hover:underline"
-					>[TELEFONNUMMER]</a
+				Telefon: <a href="tel:{PHONE_INFO.replaceAll(' ', '')}" class="text-primary hover:underline"
+					>{PHONE_INFO}</a
 				><br />
 				E-Mail:
 				<a href="mailto:{EMAIL_INFO}" class="text-primary hover:underline">{EMAIL_INFO}</a>
