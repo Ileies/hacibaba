@@ -1,5 +1,5 @@
 <script>
-	import { EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -21,8 +21,9 @@
 			<p class="mt-3">Um Ihr Widerrufsrecht auszuüben, müssen Sie uns</p>
 			<address class="bg-secondary/30 mt-2 rounded p-3 not-italic">
 				<strong>[FIRMENNAME]</strong><br />
-				[STRASSE UND HAUSNUMMER]<br />
-				[POSTLEITZAHL] [STADT]<br />
+				{BUSINESS_STREET}<br />
+				{BUSINESS_ZIP}
+				{BUSINESS_CITY}<br />
 				E-Mail:
 				<a href="mailto:{EMAIL_INFO}" class="text-primary hover:underline">{EMAIL_INFO}</a><br />
 				Telefon: [TELEFONNUMMER]
@@ -94,8 +95,9 @@
 				<p>An:</p>
 				<address class="bg-secondary/30 rounded p-3 not-italic">
 					[FIRMENNAME]<br />
-					[STRASSE UND HAUSNUMMER]<br />
-					[POSTLEITZAHL] [STADT]<br />
+					{BUSINESS_STREET}<br />
+					{BUSINESS_ZIP}
+					{BUSINESS_CITY}<br />
 					E-Mail: {EMAIL_INFO}
 				</address>
 				<p class="mt-4">

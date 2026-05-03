@@ -1,5 +1,5 @@
 <script>
-	import { EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -16,15 +16,16 @@
 			<address class="not-italic">
 				<strong>[FIRMENNAME]</strong><br />
 				[RECHTSFORM, z.&nbsp;B. GmbH / e.K. / Einzelunternehmen]<br />
-				[STRASSE UND HAUSNUMMER]<br />
-				[POSTLEITZAHL] [STADT]<br />
+				{BUSINESS_STREET}<br />
+				{BUSINESS_ZIP}
+				{BUSINESS_CITY}<br />
 				Deutschland
 			</address>
 		</section>
 
 		<section>
 			<h2 class="mb-3 text-base font-semibold">Vertreten durch</h2>
-			<p>[VORNAME NACHNAME DES GESCHÄFTSFÜHRERS / INHABERS]</p>
+			<p>Engin Karahanci</p>
 		</section>
 
 		<section>
@@ -62,9 +63,10 @@
 				Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 			</h2>
 			<address class="not-italic">
-				[VORNAME NACHNAME]<br />
-				[STRASSE UND HAUSNUMMER]<br />
-				[POSTLEITZAHL] [STADT]
+				Engin Karahanci<br />
+				{BUSINESS_STREET}<br />
+				{BUSINESS_ZIP}
+				{BUSINESS_CITY}
 			</address>
 		</section>
 

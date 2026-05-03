@@ -1,5 +1,5 @@
 <script>
-	import { EMAIL_DATENSCHUTZ } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_DATENSCHUTZ } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -16,8 +16,9 @@
 			<h2 class="mb-3 text-base font-semibold">1. Verantwortlicher</h2>
 			<address class="not-italic">
 				<strong>[FIRMENNAME]</strong><br />
-				[STRASSE UND HAUSNUMMER]<br />
-				[POSTLEITZAHL] [STADT]<br />
+				{BUSINESS_STREET}<br />
+				{BUSINESS_ZIP}
+				{BUSINESS_CITY}<br />
 				E-Mail:
 				<a href="mailto:{EMAIL_DATENSCHUTZ}" class="text-primary hover:underline"
 					>{EMAIL_DATENSCHUTZ}</a

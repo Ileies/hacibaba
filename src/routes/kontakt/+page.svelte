@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { EMAIL_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
 	import { Button, Input, Label, Textarea } from '$lib/components/ui';
 
 	let name = $state('');
@@ -73,8 +73,9 @@
 				<h2 class="mb-3 font-semibold">Adresse</h2>
 				<address class="text-muted-foreground text-sm leading-relaxed not-italic">
 					Hacibaba<br />
-					Musterstraße 1<br />
-					12345 Musterstadt<br />
+					{BUSINESS_STREET}<br />
+					{BUSINESS_ZIP}
+					{BUSINESS_CITY}<br />
 					Deutschland
 				</address>
 			</div>

@@ -1,5 +1,10 @@
-<script>
-	import { EMAIL_INFO } from '$lib/constants';
+<script lang="ts">
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO } from '$lib/constants';
+	import type { PageData } from './$types';
+
+	type AgbData = PageData & { shopHostname: string };
+
+	let { data }: { data: AgbData } = $props();
 </script>
 
 <svelte:head>
@@ -16,9 +21,9 @@
 			<h2 class="mb-3 text-base font-semibold">§ 1 Geltungsbereich</h2>
 			<p>
 				Diese Allgemeinen Geschäftsbedingungen gelten für alle Bestellungen, die über den
-				Online-Shop <strong>hacibaba.de</strong> von
-				<strong>[FIRMENNAME]</strong>, [STRASSE], [PLZ] [STADT] (nachfolgend "Verkäufer") aufgegeben
-				werden.
+				Online-Shop <strong>{data.shopHostname}</strong> von
+				<strong>[FIRMENNAME]</strong>, {BUSINESS_STREET}, {BUSINESS_ZIP}
+				{BUSINESS_CITY} (nachfolgend "Verkäufer") aufgegeben werden.
 			</p>
 		</section>
 
