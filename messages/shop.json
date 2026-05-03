@@ -202,7 +202,6 @@
 	],
 	"shop_shipping_costs": ["Versandkosten", "shipping costs", "kargo ücreti"],
 	"footer_shipping": ["Lieferbedingungen", "Shipping", "Teslimat koşulları"],
-
 	"cookie_banner_text": [
 		"Diese Website verwendet ausschließlich technisch notwendige Cookies für Anmeldung und Spracheinstellungen. Keine Tracking- oder Analyse-Cookies.",
 		"This website uses only technically necessary cookies for login and language settings. No tracking or analytics cookies.",
@@ -210,7 +209,6 @@
 	],
 	"cookie_banner_accept": ["Verstanden", "Got it", "Anladım"],
 	"cookie_banner_learn_more": ["Datenschutzerklärung", "Privacy policy", "Gizlilik politikası"],
-
 	"account_delete_heading": ["Konto löschen", "Delete account", "Hesabı sil"],
 	"account_delete_warning": [
 		"Diese Aktion ist unwiderruflich. Alle persönlichen Daten werden gelöscht. Bestelldaten bleiben aus steuerlichen Gründen anonym erhalten.",
@@ -242,7 +240,6 @@
 		"Download data (JSON)",
 		"Verileri indir (JSON)"
 	],
-
 	"footer_newsletter_check_inbox": [
 		"Fast fertig! Bitte bestätigen Sie Ihre E-Mail. Wir haben Ihnen einen Bestätigungslink geschickt.",
 		"Almost done! Please confirm your email. We've sent you a confirmation link.",
@@ -259,7 +256,6 @@
 		"This confirmation link is invalid or has expired.",
 		"Bu onay bağlantısı geçersiz veya süresi dolmuş."
 	],
-
 	"product_images": ["Produktbilder", "Product images", "Ürün görselleri"],
 	"product_allergens": ["Allergene", "Allergens", "Alerjenler"],
 	"product_contains": ["Enthält", "Contains", "İçerir"],
@@ -294,7 +290,6 @@
 	"product_fiber": ["Ballaststoffe", "Fibre", "Lif"],
 	"product_protein": ["Eiweiß", "Protein", "Protein"],
 	"product_salt": ["Salz", "Salt", "Tuz"],
-
 	"allergen_gluten": [
 		"Glutenhaltiges Getreide",
 		"Cereals containing gluten",
@@ -317,7 +312,6 @@
 	],
 	"allergen_lupin": ["Lupinen", "Lupin", "Acı bakla"],
 	"allergen_molluscs": ["Weichtiere", "Molluscs", "Yumuşakçalar"],
-
 	"shop_forgot_password": ["Passwort vergessen?", "Forgot password?", "Şifrenizi mi unuttunuz?"],
 	"shop_reset_password": ["Passwort zurücksetzen", "Reset password", "Şifreyi sıfırla"],
 	"shop_reset_password_desc": [
@@ -349,7 +343,6 @@
 		"Your password has been reset. Please sign in.",
 		"Şifreniz sıfırlandı. Lütfen giriş yapın."
 	],
-
 	"footer_trust_ssl": ["SSL-verschlüsselt", "SSL encrypted", "SSL şifreli"],
 	"footer_trust_stripe": ["Zahlung via Stripe", "Payment via Stripe", "Stripe ile ödeme"],
 	"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
@@ -358,7 +351,6 @@
 		"Carbon-neutral shipping",
 		"Karbon nötr kargo"
 	],
-
 	"account_password_change_heading": ["Passwort ändern", "Change password", "Şifre değiştir"],
 	"account_current_password": ["Aktuelles Passwort", "Current password", "Mevcut şifre"],
 	"account_new_password": ["Neues Passwort", "New password", "Yeni şifre"],
@@ -378,7 +370,6 @@
 		"New passwords do not match.",
 		"Yeni şifreler eşleşmiyor."
 	],
-
 	"account_newsletter_heading": ["Newsletter", "Newsletter", "Bülten"],
 	"account_newsletter_on": ["Newsletter abonniert", "Subscribed to newsletter", "Bültene abone"],
 	"account_newsletter_off": [
@@ -388,10 +379,8 @@
 	],
 	"account_newsletter_subscribe_btn": ["Abonnieren", "Subscribe", "Abone ol"],
 	"account_newsletter_unsubscribe_btn": ["Abbestellen", "Unsubscribe", "Aboneliği iptal et"],
-
 	"account_order_details": ["Bestelldetails", "Order details", "Sipariş detayları"],
 	"account_order_track": ["Sendung verfolgen", "Track shipment", "Kargo takibi"],
-
 	"shop_gift_message": [
 		"Persönliche Nachricht / Geschenkbotschaft",
 		"Personal message / gift note",
@@ -402,7 +391,6 @@
 		"Optional - will be enclosed with the order",
 		"İsteğe bağlı - siparişe eklenecek"
 	],
-
 	"tag_halal": ["Halal", "Halal", "Helal"],
 	"tag_vegan": ["Vegan", "Vegan", "Vegan"],
 	"tag_glutenfrei": ["Glutenfrei", "Gluten-free", "Glutensiz"],
@@ -410,43 +398,35 @@
 	"tag_bestseller": ["Bestseller", "Bestseller", "Çok satan"],
 	"tag_neu": ["Neu", "New", "Yeni"],
 	"tag_saisonal": ["Saisonal", "Seasonal", "Mevsimlik"],
-
 	"shop_filter": ["Filtern", "Filter", "Filtrele"],
 	"shop_filter_all": ["Alle", "All", "Tümü"],
 	"shop_sort": ["Sortieren", "Sort", "Sırala"],
 	"shop_filter_price": ["Preisbereich", "Price range", "Fiyat aralığı"],
 	"shop_filter_tags": ["Merkmale", "Features", "Özellikler"],
 	"shop_filter_clear": ["Filter zurücksetzen", "Clear filters", "Filtreleri temizle"],
-
 	"shop_testimonials_heading": [
 		"Das sagen unsere Kunden",
 		"What our customers say",
 		"Müşterilerimiz ne diyor"
 	],
-
 	"shop_account_blocked": [
 		"Ihr Konto wurde gesperrt. Bitte kontaktieren Sie uns.",
 		"Your account has been blocked. Please contact us.",
 		"Hesabınız engellendi. Lütfen bizimle iletişime geçin."
 	],
-
 	"shop_breadcrumb_home": ["Startseite", "Home", "Ana Sayfa"],
 	"shop_breadcrumb_products": ["Produkte", "Products", "Ürünler"],
-
 	"shop_share": ["Teilen", "Share", "Paylaş"],
 	"shop_share_whatsapp": ["WhatsApp", "WhatsApp", "WhatsApp"],
 	"shop_share_copy_link": ["Link kopieren", "Copy link", "Linki kopyala"],
 	"shop_link_copied": ["Link kopiert!", "Link copied!", "Link kopyalandı!"],
-
 	"shop_nav_products": ["Produkte", "Products", "Ürünler"],
 	"shop_nav_about": ["Über uns", "About us", "Hakkımızda"],
 	"shop_nav_contact": ["Kontakt", "Contact", "İletişim"],
 	"shop_nav_faq": ["FAQ", "FAQ", "SSS"],
-
 	"shop_unit_price": ["Einzelpreis", "Unit price", "Birim fiyat"],
 	"shop_net_amount": ["Nettobetrag", "Net amount", "Net tutar"],
 	"shop_vat_7_pct": ["MwSt. 7 %", "VAT 7%", "KDV %7"],
-
 	"account_addresses_heading": ["Adressbuch", "Address book", "Adres defteri"],
 	"account_addresses_empty": [
 		"Noch keine Adressen gespeichert.",
@@ -465,5 +445,20 @@
 	"account_address_label_hint": ["z.B. Firma, Lager", "e.g. Office, Warehouse", "ör. Ofis, Depo"],
 	"account_address_saved": ["Adresse gespeichert.", "Address saved.", "Adres kaydedildi."],
 	"account_address_deleted": ["Adresse gelöscht.", "Address deleted.", "Adres silindi."],
-	"account_address_selector_new": ["Neue Adresse eingeben", "Enter new address", "Yeni adres gir"]
+	"account_address_selector_new": ["Neue Adresse eingeben", "Enter new address", "Yeni adres gir"],
+	"checkout_zip_invalid_format": [
+		"Postleitzahl muss aus 5 Ziffern bestehen",
+		"ZIP code must be 5 digits",
+		"Posta kodu 5 rakamdan oluşmalıdır"
+	],
+	"checkout_zip_not_found": [
+		"Postleitzahl nicht gefunden",
+		"ZIP code not found",
+		"Posta kodu bulunamadı"
+	],
+	"checkout_street_no_housenumber": [
+		"Bitte Hausnummer angeben",
+		"Please include house number",
+		"Lütfen kapı numarasını girin"
+	]
 }
