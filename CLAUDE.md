@@ -1,6 +1,6 @@
 # Hacibaba - Webshop
 
-German e-commerce store for a Turkish Lokum manufacturer. SvelteKit + Bun + SQLite + Drizzle. UI in German, shadcn-svelte components (no DaisyUI). Customer auth: email/password + Google OAuth. Admin auth: static .env credentials. Sells exclusively Lokum (Turkish delight).
+German e-commerce store for a Turkish Lokum manufacturer. SvelteKit + Bun + SQLite + Drizzle. UI in German, built on bits-ui. Customer auth: email/password + Google OAuth. Admin auth: static .env credentials. Sells exclusively Lokum (Turkish delight).
 
 ## Target Audience
 
@@ -78,7 +78,7 @@ src/
 │   ├── types.ts              - TypeScript interfaces + helpers (formatPrice, localizedName, hasAllergen, ...)
 │   ├── utils.ts              - cn() utility (clsx + tailwind-merge)
 │   ├── components/
-│   │   ├── ui/               - shadcn-svelte components
+│   │   ├── ui/               - bits-ui components
 │   │   ├── AuthLayout.svelte
 │   │   ├── BackLink.svelte
 │   │   ├── CookieBanner.svelte
@@ -98,7 +98,7 @@ src/
 │       ├── session-cleanup.ts - Clean expired sessions (startup + daily)
 │       ├── env-check.ts      - Validate required env vars at startup
 │       └── shutdown.ts       - Graceful shutdown handler
-└── app.css                   - Tailwind CSS v4 + shadcn color theme (@theme block)
+└── app.css                   - Tailwind CSS v4 + color theme (@theme block)
 ```
 
 ## To-Do-List
@@ -138,15 +138,15 @@ Set up credentials at console.cloud.google.com. Add `http://localhost:5173/auth/
 ### Admin auth
 
 - **Credentials:** In `.env` as `ADMIN_USERNAME` / `ADMIN_PASSWORD` (plaintext, compared at login time). Use HTTPS in production.
-- **Login page:** `/admin/login` - clean form, no HTTP Basic Auth
+- **Login page:** `/admin/login`
 - **Logout:** `POST /admin/logout`
 - **Session cookie:** `admin_session` (httpOnly, sameSite=lax, 7-day expiry)
 - **No DB table for admin users** - single admin, credentials are static. Sessions are stored in `admin_sessions` table (token only, no FK).
 - **Protection:** `handleAdminAuth()` in `hooks.server.ts` - redirects to `/admin/login` for any unauthenticated `/admin/**` request.
 
-### UI components (shadcn-svelte)
+## UI Components
 
-Components live in `src/lib/components/ui/`. Import from the barrel:
+Components live in `src/lib/components/ui/`, built on bits-ui. Import from the barrel:
 
 ```typescript
 import {
@@ -267,7 +267,7 @@ SMTP_HOST                        # SMTP server hostname (optional)
 SMTP_PORT                        # SMTP port, e.g. 587 (optional)
 SMTP_USER                        # SMTP username (optional)
 SMTP_PASS                        # SMTP password (optional)
-SMTP_FROM                        # Sender address, e.g. "Haci Baba <info@hacibaba.de>" (optional)
+SMTP_FROM                        # Sender address, e.g. "Hacibaba <info@hacibaba1988.de>" (optional)
 ```
 
 ## Git
@@ -288,11 +288,6 @@ SMTP_FROM                        # Sender address, e.g. "Haci Baba <info@hacibab
 ## Key Gotchas
 
 - `messages.ts` is auto-generated - run `bun run dev` once to generate it before `bun run check` works.
-- Prices are **always EUR cents** (integer). `formatPrice(cents)` converts for display.
-- `products.images` is a JSON string (`string[]`), not a native array. Parse it: `JSON.parse(product.images ?? '[]')`.
-- `products.nutrition` is a JSON string (`NutritionInfo`). Parse before use. Use helper `parseProductData()` from `$lib/server/queries` which handles both.
-- `orders.shippingAddress` is a JSON string (`ShippingAddress`). Parse before use.
-- Product names are localized columns (`name_de`, `name_en`, `name_tr`). Use `localizedName(product, locale)` - never hardcode one column.
+- `products.images`, `products.nutrition`, and `orders.shippingAddress`/`billingAddress` are JSON strings - parse on read. Use `parseProductData()` from `$lib/server/queries` for products.
 - `db.sqlite` path is relative - always run commands from the project root.
 - Cart state lives only in the browser (localStorage). Server-side renders don't have cart data.
-- Admin session cookie is `httpOnly` - not accessible from JavaScript.
