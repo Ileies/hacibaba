@@ -1,5 +1,5 @@
 <script>
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
+	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, OWNER_PRIMARY, OWNER_SECONDARY, PHONE_INFO } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -25,7 +25,7 @@
 
 		<section>
 			<h2 class="mb-3 text-base font-semibold">Vertreten durch</h2>
-			<p>Engin Karahanci</p>
+			<p>{OWNER_PRIMARY}<br />{OWNER_SECONDARY}</p>
 		</section>
 
 		<section>
@@ -63,7 +63,7 @@
 				Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 			</h2>
 			<address class="not-italic">
-				Engin Karahanci<br />
+				{OWNER_PRIMARY}<br />
 				{BUSINESS_STREET}<br />
 				{BUSINESS_ZIP}
 				{BUSINESS_CITY}
