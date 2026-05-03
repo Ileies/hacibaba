@@ -1,4 +1,16 @@
 import type { CartItem } from '$lib/types';
+import { type PersistedCartLine, parsePersistedLines, fingerprint } from '$lib/cart-lines';
+
+function readLinesFromLocalStorage(): PersistedCartLine[] | null {
+	if (typeof window === 'undefined') return null;
+	const saved = localStorage.getItem('cart');
+	if (!saved) return null;
+	try {
+		return parsePersistedLines(JSON.parse(saved));
+	} catch {
+		return null;
+	}
+}
 
 // --- Toast store ---
 
@@ -30,22 +42,70 @@ export const toasts = new ToastStore();
 
 class CartStore {
 	items = $state<CartItem[]>([]);
+	/** Distinct product lines in LS while a hydrate request is in flight (badge). */
+	private optimisticLineCount = $state<number | null>(null);
+	private hydratePromise: Promise<void> | null = null;
 
 	get total(): number {
 		return this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 	}
 
 	get count(): number {
-		return this.items.length;
+		if (this.items.length > 0) return this.items.length;
+		if (this.optimisticLineCount !== null) return this.optimisticLineCount;
+		return 0;
 	}
 
-	load(): void {
-		if (typeof window === 'undefined') return;
-		try {
-			const saved = localStorage.getItem('cart');
-			if (saved) this.items = JSON.parse(saved);
-		} catch {
-			/* ignore corrupt data */
+	/**
+	 * Reads minimal cart lines from localStorage and hydrates items from the server (DB names and prices).
+	 * Safe to call multiple times; concurrent calls share one in-flight request.
+	 */
+	load(): Promise<void> {
+		if (typeof window === 'undefined') return Promise.resolve();
+		if (this.hydratePromise) return this.hydratePromise;
+		this.hydratePromise = this.hydrateFromStorage().finally(() => {
+			this.hydratePromise = null;
+		});
+		return this.hydratePromise;
+	}
+
+	private async hydrateFromStorage(): Promise<void> {
+		for (let depth = 0; depth < 10; depth++) {
+			const lines = readLinesFromLocalStorage();
+			if (!lines?.length) {
+				this.items = [];
+				this.optimisticLineCount = null;
+				localStorage.removeItem('cart');
+				return;
+			}
+
+			const fpStart = fingerprint(lines);
+			this.optimisticLineCount = lines.length;
+
+			let data: { items: CartItem[] };
+			try {
+				const res = await fetch('/api/cart/hydrate', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ items: lines })
+				});
+				if (!res.ok) throw new Error('hydrate_failed');
+				data = (await res.json()) as { items: CartItem[] };
+			} catch {
+				this.optimisticLineCount = null;
+				return;
+			}
+
+			const linesAfter = readLinesFromLocalStorage();
+			const fpAfter = linesAfter && linesAfter.length > 0 ? fingerprint(linesAfter) : '';
+			if (fpAfter !== fpStart) {
+				continue;
+			}
+
+			this.items = data.items;
+			this.optimisticLineCount = null;
+			this.persist();
+			return;
 		}
 	}
 
@@ -85,8 +145,15 @@ class CartStore {
 	}
 
 	private persist(): void {
-		if (typeof window !== 'undefined') {
-			localStorage.setItem('cart', JSON.stringify(this.items));
+		if (typeof window === 'undefined') return;
+		const lines: PersistedCartLine[] = this.items.map(({ productId, quantity }) => ({
+			productId,
+			quantity
+		}));
+		if (lines.length === 0) {
+			localStorage.removeItem('cart');
+		} else {
+			localStorage.setItem('cart', JSON.stringify(lines));
 		}
 	}
 }

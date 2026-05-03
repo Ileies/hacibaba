@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { cart } from '$lib/states.svelte';
-	import { formatPrice } from '$lib/types';
+	import type { PageData } from './$types';
+	import { formatPrice, localizedName } from '$lib/types';
 	import { Button, Separator } from '$lib/components/ui';
 	import { Trash2 } from 'lucide-svelte';
 	import * as m from '$lib/messages';
 	import { env } from '$env/dynamic/public';
+
+	let { data }: { data: PageData } = $props();
 
 	const freeThreshold = parseInt(env.PUBLIC_FREE_SHIPPING_THRESHOLD ?? '5000');
 	const shippingCost = parseInt(env.PUBLIC_SHIPPING_COST ?? '590');
 	const shipping = $derived(cart.total >= freeThreshold ? 0 : shippingCost);
 	const total = $derived(cart.total + shipping);
 	const remaining = $derived(Math.max(0, freeThreshold - cart.total));
-
-	onMount(() => cart.load());
 </script>
 
 <svelte:head><title>{m.shop_cart()} - {m.shop_title()}</title></svelte:head>
@@ -41,18 +41,19 @@
 
 		<div class="mb-8 space-y-1">
 			{#each cart.items as item (item.productId)}
+				{@const lineName = localizedName(item, data.locale)}
 				<div class="border-border flex items-center gap-4 border-b py-4 last:border-0">
 					{#if item.imageUrl}
 						<img
 							src={item.imageUrl}
-							alt={item.name}
+							alt={lineName}
 							class="bg-secondary/30 h-16 w-16 shrink-0 rounded-lg object-cover"
 						/>
 					{:else}
 						<div class="bg-secondary/30 h-16 w-16 shrink-0 rounded-lg"></div>
 					{/if}
 					<div class="min-w-0 flex-1">
-						<p class="truncate text-sm font-medium">{item.name}</p>
+						<p class="truncate text-sm font-medium">{lineName}</p>
 						<p class="text-muted-foreground mt-0.5 text-xs">
 							{formatPrice(item.price)}
 							{m.shop_per_piece()}

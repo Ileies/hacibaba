@@ -71,7 +71,9 @@ export type DbOrderItem = typeof orderItemsTable.$inferSelect;
 
 export interface CartItem {
 	productId: number;
-	name: string;
+	name_de: string | null;
+	name_en: string | null;
+	name_tr: string;
 	price: number; // EUR cents
 	quantity: number;
 	imageUrl: string | null;

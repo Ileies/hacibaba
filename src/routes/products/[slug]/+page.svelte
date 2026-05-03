@@ -193,7 +193,9 @@
 						onclick={() => {
 							cart.add({
 								productId: data.product.id,
-								name: data.product.name,
+								name_de: data.product.name_de,
+								name_en: data.product.name_en,
+								name_tr: data.product.name_tr,
 								price: data.product.price,
 								imageUrl: data.product.imageUrl,
 								quantity
@@ -351,7 +353,9 @@
 			onclick={() => {
 				cart.add({
 					productId: data.product.id,
-					name: data.product.name,
+					name_de: data.product.name_de,
+					name_en: data.product.name_en,
+					name_tr: data.product.name_tr,
 					price: data.product.price,
 					imageUrl: data.product.imageUrl,
 					quantity

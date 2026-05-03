@@ -12,6 +12,9 @@
 			id: number;
 			slug: string;
 			name: string;
+			name_de: string | null;
+			name_en: string | null;
+			name_tr: string;
 			price: number;
 			originalPrice?: number | null;
 			stockQuantity?: number | null;
@@ -107,7 +110,9 @@
 					onclick={() =>
 						cart.add({
 							productId: product.id,
-							name: product.name,
+							name_de: product.name_de,
+							name_en: product.name_en,
+							name_tr: product.name_tr,
 							price: product.price,
 							imageUrl: product.imageUrl
 						})}
