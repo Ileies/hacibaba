@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
 	import { cart } from '$lib/states.svelte';
-	import { formatPrice } from '$lib/types';
+	import { formatPrice, localizedName } from '$lib/types';
 	import { goto } from '$app/navigation';
 	import { Button, Input, Label, Textarea, Separator, Select } from '$lib/components/ui';
 	import Spinner from '$lib/components/Spinner.svelte';
@@ -30,7 +30,19 @@
 	let selectedAddressId = $state<number | 'new'>(defaultAddr ? defaultAddr.id : 'new');
 
 	$effect(() => {
-		if (selectedAddressId === 'new') return;
+		if (selectedAddressId === 'new') {
+			if (data.savedAddresses && data.savedAddresses.length > 0) {
+				form.firstName = '';
+				form.lastName = '';
+				form.street = '';
+				form.city = '';
+				form.zip = '';
+				form.state = '';
+				citySuggestions = [];
+				zipLookupState = 'idle';
+			}
+			return;
+		}
 		const addr = data.savedAddresses?.find((a) => a.id === selectedAddressId);
 		if (!addr) return;
 		form.firstName = addr.firstName;
@@ -65,6 +77,63 @@
 		'Thüringen'
 	];
 
+	const STATE_ABBREV_MAP: Record<string, string> = {
+		BE: 'Berlin',
+		BY: 'Bayern',
+		BW: 'Baden-Württemberg',
+		BB: 'Brandenburg',
+		HB: 'Bremen',
+		HH: 'Hamburg',
+		HE: 'Hessen',
+		MV: 'Mecklenburg-Vorpommern',
+		NI: 'Niedersachsen',
+		NW: 'Nordrhein-Westfalen',
+		RP: 'Rheinland-Pfalz',
+		SL: 'Saarland',
+		SN: 'Sachsen',
+		ST: 'Sachsen-Anhalt',
+		SH: 'Schleswig-Holstein',
+		TH: 'Thüringen'
+	};
+
+	let citySuggestions = $state<string[]>([]);
+	let zipLookupState = $state<'idle' | 'loading' | 'valid' | 'invalid'>('idle');
+	let zipAbortController: AbortController | null = null;
+
+	async function lookupZip(zip: string) {
+		zipAbortController?.abort();
+		if (!/^\d{5}$/.test(zip)) {
+			citySuggestions = [];
+			zipLookupState = 'idle';
+			return;
+		}
+		zipAbortController = new AbortController();
+		zipLookupState = 'loading';
+		try {
+			const res = await fetch(`https://api.zippopotam.us/de/${zip}`, {
+				signal: zipAbortController.signal
+			});
+			if (!res.ok) {
+				zipLookupState = 'invalid';
+				citySuggestions = [];
+				return;
+			}
+			const responseData = await res.json();
+			type ZipPlace = { 'place name': string; state: string; 'state abbreviation': string };
+			const places = responseData.places as ZipPlace[];
+			citySuggestions = places.map((p) => p['place name']);
+			zipLookupState = places.length > 0 ? 'valid' : 'invalid';
+			if (places.length > 0) {
+				if (!form.city) form.city = places[0]['place name'];
+				form.state = STATE_ABBREV_MAP[places[0]['state abbreviation']] ?? form.state;
+			}
+		} catch (e) {
+			if (e instanceof Error && e.name === 'AbortError') return;
+			zipLookupState = 'idle';
+			citySuggestions = [];
+		}
+	}
+
 	let form = $state(
 		untrack(() => ({
 			firstName: defaultAddr?.firstName ?? data.customer?.name.split(' ')[0] ?? '',
@@ -81,8 +150,8 @@
 		}))
 	);
 
-	onMount(() => {
-		cart.load();
+	onMount(async () => {
+		await cart.load();
 		if (cart.count === 0) goto('/cart');
 	});
 
@@ -91,9 +160,19 @@
 		if (!form.firstName) errors.firstName = m.common_required_field();
 		if (!form.lastName) errors.lastName = m.common_required_field();
 		if (!form.email) errors.email = m.common_required_field();
-		if (!form.street) errors.street = m.common_required_field();
+		if (!form.street) {
+			errors.street = m.common_required_field();
+		} else if (!/\d/.test(form.street)) {
+			errors.street = m.checkout_street_no_housenumber();
+		}
 		if (!form.city) errors.city = m.common_required_field();
-		if (!form.zip) errors.zip = m.common_required_field();
+		if (!form.zip) {
+			errors.zip = m.common_required_field();
+		} else if (!/^\d{5}$/.test(form.zip)) {
+			errors.zip = m.checkout_zip_invalid_format();
+		} else if (zipLookupState === 'invalid') {
+			errors.zip = m.checkout_zip_not_found();
+		}
 		if (!form.state) errors.state = m.common_required_field();
 		if (Object.keys(errors).length > 0) return;
 
@@ -104,7 +183,13 @@
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					customer: form,
-					items: cart.items,
+					items: cart.items.map((item) => ({
+						productId: item.productId,
+						name: localizedName(item, data.locale),
+						price: item.price,
+						quantity: item.quantity,
+						imageUrl: item.imageUrl
+					})),
 					shippingCost: shipping,
 					giftMessage: form.giftMessage || undefined
 				})
@@ -298,12 +383,26 @@
 							</div>
 							<div class="space-y-1.5">
 								<Label for="zip">{m.shop_zip()} *</Label>
-								<Input
-									id="zip"
-									bind:value={form.zip}
-									class={errors.zip ? 'border-destructive' : ''}
-									autocomplete="postal-code"
-								/>
+								<div class="relative">
+									<Input
+										id="zip"
+										bind:value={form.zip}
+										class={errors.zip
+											? 'border-destructive'
+											: zipLookupState === 'valid'
+												? 'border-green-500'
+												: ''}
+										autocomplete="postal-code"
+										inputmode="numeric"
+										maxlength={5}
+										oninput={() => lookupZip(form.zip)}
+									/>
+									{#if zipLookupState === 'loading'}
+										<div class="absolute top-1/2 right-3 -translate-y-1/2">
+											<Spinner class="h-4 w-4" />
+										</div>
+									{/if}
+								</div>
 								{#if errors.zip}<p class="text-destructive text-xs">{errors.zip}</p>{/if}
 							</div>
 							<div class="space-y-1.5">
@@ -311,9 +410,17 @@
 								<Input
 									id="city"
 									bind:value={form.city}
+									list="city-suggestions"
 									class={errors.city ? 'border-destructive' : ''}
 									autocomplete="address-level2"
 								/>
+								{#if citySuggestions.length > 0}
+									<datalist id="city-suggestions">
+										{#each citySuggestions as city (city)}
+											<option value={city}></option>
+										{/each}
+									</datalist>
+								{/if}
 								{#if errors.city}<p class="text-destructive text-xs">{errors.city}</p>{/if}
 							</div>
 							<div class="space-y-1.5">
@@ -427,11 +534,12 @@
 			<h2 class="font-semibold">{m.shop_order_summary()}</h2>
 			<div class="space-y-2 text-sm">
 				{#each cart.items as item (item.productId)}
+					{@const lineName = localizedName(item, data.locale)}
 					<div class="flex items-center gap-2">
 						{#if item.imageUrl}
 							<img
 								src={item.imageUrl}
-								alt={item.name}
+								alt={lineName}
 								class="h-9 w-9 shrink-0 rounded object-cover"
 								loading="lazy"
 							/>
@@ -439,7 +547,7 @@
 							<div class="bg-secondary h-9 w-9 shrink-0 rounded"></div>
 						{/if}
 						<span class="text-muted-foreground min-w-0 flex-1 truncate"
-							>{item.name} ×{item.quantity}</span
+							>{lineName} ×{item.quantity}</span
 						>
 						<span class="shrink-0">{formatPrice(item.price * item.quantity)}</span>
 					</div>

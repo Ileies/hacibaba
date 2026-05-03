@@ -9,7 +9,7 @@ export const orderSchema = z.object({
 		phone: z.string().max(50).optional(),
 		street: z.string().min(1).max(200),
 		city: z.string().min(1).max(100),
-		zip: z.string().min(4).max(10),
+		zip: z.string().regex(/^\d{5}$/, 'Invalid German ZIP code'),
 		state: z.string().max(100).optional(),
 		country: z.string().length(2).default('DE'),
 		notes: z.string().max(1000).optional()
@@ -27,6 +27,17 @@ export const orderSchema = z.object({
 		.min(1),
 	shippingCost: z.number().int().nonnegative(),
 	giftMessage: z.string().max(500).optional()
+});
+
+export const cartHydrateSchema = z.object({
+	items: z
+		.array(
+			z.object({
+				productId: z.number().int().positive(),
+				quantity: z.number().int().min(1).max(9999)
+			})
+		)
+		.max(100)
 });
 
 export const newsletterSchema = z.object({
