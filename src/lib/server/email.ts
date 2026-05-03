@@ -1,9 +1,14 @@
 import nodemailer from 'nodemailer';
 import { env } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
 import { EMAIL_BESTELLUNGEN } from '$lib/constants';
 
 function siteUrl(): string {
-	return env.PUBLIC_SITE_URL ?? 'https://hacibaba.de';
+	return publicEnv.PUBLIC_SITE_URL.replace(/\/$/, '');
+}
+
+function siteHostname(): string {
+	return new URL(siteUrl()).hostname;
 }
 
 function formatEur(cents: number): string {
@@ -48,6 +53,7 @@ export async function sendMail(to: string, subject: string, html: string): Promi
 
 function wrap(content: string): string {
 	const url = siteUrl();
+	const host = siteHostname();
 	return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -73,7 +79,7 @@ function wrap(content: string): string {
     <td style="background:#f5f5f4;padding:20px 36px;border-top:1px solid #e7e5e4;">
       <p style="margin:0;color:#78716c;font-size:12px;text-align:center;font-family:Arial,sans-serif;">
         &copy; Hacibaba &middot;
-        <a href="${url}" style="color:#b45309;text-decoration:none;">hacibaba.de</a>
+        <a href="${url}" style="color:#b45309;text-decoration:none;">${esc(host)}</a>
       </p>
     </td>
   </tr>

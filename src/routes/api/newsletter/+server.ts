@@ -6,6 +6,7 @@ import { newsletterSubscribersTable } from '$lib/server/schema';
 import { eq } from 'drizzle-orm';
 import { sendMail } from '$lib/server/email';
 import { env } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
 
 function generateToken(): string {
 	const bytes = new Uint8Array(24);
@@ -20,7 +21,7 @@ function tokenExpiresAt(): string {
 }
 
 async function sendConfirmationEmail(email: string, token: string): Promise<void> {
-	const siteUrl = env.PUBLIC_SITE_URL ?? 'https://hacibaba.de';
+	const siteUrl = publicEnv.PUBLIC_SITE_URL.replace(/\/$/, '');
 	const confirmUrl = `${siteUrl}/auth/newsletter/confirm/${token}`;
 
 	if (!env.SMTP_HOST) {

@@ -36,22 +36,25 @@
 		}
 	}
 
-	onMount(() => cart.load());
+	onMount(() => {
+		void cart.load();
+	});
 
-	const orgJsonLd =
+	const orgJsonLd = $derived(
 		`<script type="application/ld+json">${JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'Organization',
 			name: 'Hacibaba',
-			url: 'https://hacibaba.de',
-			logo: 'https://hacibaba.de/logo.webp',
+			url: data.siteOrigin,
+			logo: `${data.siteOrigin}/logo.webp`,
 			foundingDate: '1988',
 			contactPoint: {
 				'@type': 'ContactPoint',
 				contactType: 'customer service',
 				email: EMAIL_INFO
 			}
-		})}<` + `/script>`;
+		})}<` + `/script>`
+	);
 </script>
 
 <svelte:head>
@@ -65,10 +68,10 @@
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:image" content="/logo.webp" />
 	<!-- Hreflang (#80) -->
-	<link rel="alternate" hreflang="de" href="https://hacibaba.de{data.pathname ?? ''}" />
-	<link rel="alternate" hreflang="en" href="https://hacibaba.de{data.pathname ?? ''}" />
-	<link rel="alternate" hreflang="tr" href="https://hacibaba.de{data.pathname ?? ''}" />
-	<link rel="alternate" hreflang="x-default" href="https://hacibaba.de{data.pathname ?? ''}" />
+	<link rel="alternate" hreflang="de" href="{data.siteOrigin}{data.pathname ?? ''}" />
+	<link rel="alternate" hreflang="en" href="{data.siteOrigin}{data.pathname ?? ''}" />
+	<link rel="alternate" hreflang="tr" href="{data.siteOrigin}{data.pathname ?? ''}" />
+	<link rel="alternate" hreflang="x-default" href="{data.siteOrigin}{data.pathname ?? ''}" />
 	<!-- Organization JSON-LD (#77) -->
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html orgJsonLd}

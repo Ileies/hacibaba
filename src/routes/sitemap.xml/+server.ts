@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import { env } from '$env/dynamic/public';
 
 export const GET: RequestHandler = () => {
-	const siteUrl = (env.PUBLIC_SITE_URL ?? 'https://hacibaba.de').replace(/\/$/, '');
+	const siteUrl = env.PUBLIC_SITE_URL.replace(/\/$/, '');
 
 	const products = db
 		.select({ slug: productsTable.slug, updatedAt: productsTable.updatedAt })
