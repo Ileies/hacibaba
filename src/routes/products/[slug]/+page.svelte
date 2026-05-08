@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { formatPrice, activeAllergens, activeTags } from '$lib/types';
-	import { cart, toasts } from '$lib/states.svelte';
+	import { cart } from '$lib/states.svelte';
 	import { Button, Badge, Separator } from '$lib/components/ui';
 	import { ShoppingCart } from 'lucide-svelte';
 	import Breadcrumb from '$lib/components/Breadcrumb.svelte';
@@ -201,7 +201,6 @@
 								imageUrl: data.product.imageUrl,
 								quantity
 							});
-							toasts.add(m.shop_added_to_cart());
 							quantity = 1;
 						}}
 					>
@@ -362,7 +361,6 @@
 					imageUrl: data.product.imageUrl,
 					quantity
 				});
-				toasts.add(m.shop_added_to_cart());
 			}}
 			class="shrink-0 gap-2"
 		>

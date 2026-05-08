@@ -4,7 +4,7 @@
 	import { CheckCircle, XCircle, Info, X } from 'lucide-svelte';
 </script>
 
-<div class="pointer-events-none fixed top-4 right-4 z-[100] flex w-full max-w-sm flex-col gap-2">
+<div class="pointer-events-none fixed bottom-4 right-4 z-[100] flex w-full max-w-sm flex-col gap-2">
 	{#each toasts.items as toast (toast.id)}
 		<div
 			transition:fly={{ x: 80, duration: 200 }}
@@ -23,7 +23,7 @@
 			<p class="flex-1 text-sm">{toast.message}</p>
 			<button
 				onclick={() => toasts.remove(toast.id)}
-				class="text-muted-foreground hover:text-foreground -mr-1 -mt-0.5 flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors hover:bg-black/5"
+				class="text-muted-foreground hover:text-foreground -mt-0.5 -mr-1 flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors hover:bg-black/5"
 				aria-label="Schließen"
 			>
 				<X size={14} />
