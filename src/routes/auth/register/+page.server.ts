@@ -1,8 +1,9 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import bcrypt from 'bcryptjs';
 import db from '$lib/server/db';
 import { customersTable } from '$lib/server/schema';
-import { createCustomerSession } from '$lib/server/auth';
+import { createCustomerSession, linkGuestOrders } from '$lib/server/auth';
 import { sendWelcomeEmail } from '$lib/server/email';
 import { registerSchema } from '$lib/server/validation';
 import { eq } from 'drizzle-orm';
@@ -14,16 +15,17 @@ export const load: PageServerLoad = ({ locals }) => {
 export const actions: Actions = {
 	default: async (event) => {
 		const data = await event.request.formData();
-		const name = String(data.get('name') ?? '').trim();
+		const firstName = String(data.get('firstName') ?? '').trim();
+		const lastName = String(data.get('lastName') ?? '').trim();
 		const email = String(data.get('email') ?? '')
 			.trim()
 			.toLowerCase();
 		const result = registerSchema.safeParse({
-			name,
+			name: `${firstName} ${lastName}`,
 			email,
 			password: String(data.get('password') ?? '')
 		});
-		if (!result.success) return fail(400, { error: 'invalid', name, email });
+		if (!result.success) return fail(400, { error: 'invalid', firstName, lastName, email });
 
 		const { password } = result.data;
 
@@ -33,15 +35,17 @@ export const actions: Actions = {
 			.where(eq(customersTable.email, email))
 			.get();
 
-		if (existing) return fail(400, { error: 'email_taken', name, email });
+		if (existing) return fail(400, { error: 'email_taken', firstName, lastName, email });
 
-		const passwordHash = await Bun.password.hash(password, { algorithm: 'bcrypt', cost: 12 });
+		const name = result.data.name;
+		const passwordHash = await bcrypt.hash(password, 12);
 		const [customer] = db
 			.insert(customersTable)
 			.values({ email, name, passwordHash })
 			.returning({ id: customersTable.id })
 			.all();
 
+		linkGuestOrders(customer.id, email);
 		await createCustomerSession(customer.id, event);
 		sendWelcomeEmail(email, name).catch(console.error);
 		redirect(302, '/account');

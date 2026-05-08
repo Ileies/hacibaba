@@ -64,17 +64,31 @@
 				}}
 				class="space-y-3"
 			>
-				<div class="space-y-1.5">
-					<Label for="name">{m.shop_full_name()}</Label>
-					<Input
-						id="name"
-						name="name"
-						type="text"
-						placeholder="Max Mustermann"
-						required
-						autocomplete="name"
-						value={form?.name ?? ''}
-					/>
+				<div class="grid grid-cols-2 gap-3">
+					<div class="space-y-1.5">
+						<Label for="firstName">{m.shop_first_name()}</Label>
+						<Input
+							id="firstName"
+							name="firstName"
+							type="text"
+							placeholder="Max"
+							required
+							autocomplete="given-name"
+							value={form?.firstName ?? ''}
+						/>
+					</div>
+					<div class="space-y-1.5">
+						<Label for="lastName">{m.shop_last_name()}</Label>
+						<Input
+							id="lastName"
+							name="lastName"
+							type="text"
+							placeholder="Mustermann"
+							required
+							autocomplete="family-name"
+							value={form?.lastName ?? ''}
+						/>
+					</div>
 				</div>
 				<div class="space-y-1.5">
 					<Label for="email">{m.shop_email()}</Label>

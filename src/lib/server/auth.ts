@@ -5,9 +5,10 @@ import {
 	customersTable,
 	customerSessionsTable,
 	adminSessionsTable,
-	oauthAccountsTable
+	oauthAccountsTable,
+	ordersTable
 } from '$lib/server/schema';
-import { and, eq, gt } from 'drizzle-orm';
+import { and, eq, gt, isNull } from 'drizzle-orm';
 
 // --- Shared helpers ---
 
@@ -23,6 +24,13 @@ export function generateSessionToken(): string {
 
 function sessionExpiresAt(): string {
 	return new Date(Date.now() + SESSION_DURATION_MS).toISOString();
+}
+
+export function linkGuestOrders(customerId: number, email: string): void {
+	db.update(ordersTable)
+		.set({ customerId })
+		.where(and(eq(ordersTable.customerEmail, email), isNull(ordersTable.customerId)))
+		.run();
 }
 
 // --- Customer auth ---
@@ -124,6 +132,7 @@ export async function findOrCreateOauthCustomer(
 	}
 
 	db.insert(oauthAccountsTable).values({ provider, providerUserId, customerId: customer.id }).run();
+	linkGuestOrders(customer.id, email);
 
 	return customer.id;
 }
