@@ -334,14 +334,10 @@
 					<a href="/kontakt" class="text-muted-foreground hover:text-foreground transition-colors"
 						>{m.footer_contact()}</a
 					>
-					<a
-						href="/widerruf"
-						class="text-muted-foreground hover:text-foreground transition-colors"
+					<a href="/widerruf" class="text-muted-foreground hover:text-foreground transition-colors"
 						>{m.footer_withdrawal()}</a
 					>
-					<a
-						href="/impressum"
-						class="text-muted-foreground hover:text-foreground transition-colors"
+					<a href="/impressum" class="text-muted-foreground hover:text-foreground transition-colors"
 						>{m.footer_imprint()}</a
 					>
 					<a

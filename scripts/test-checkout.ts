@@ -20,7 +20,10 @@ async function main() {
 	await page.waitForLoadState('networkidle');
 
 	// "In den Warenkorb" klicken
-	const addToCartBtn = page.locator('button').filter({ hasText: /warenkorb/i }).first();
+	const addToCartBtn = page
+		.locator('button')
+		.filter({ hasText: /warenkorb/i })
+		.first();
 	await addToCartBtn.click();
 	console.log('   -> Produkt in Warenkorb gelegt');
 	await page.waitForTimeout(500);
@@ -33,11 +36,16 @@ async function main() {
 	const url = page.url();
 	if (url.includes('/cart')) {
 		console.log('   -> Warenkorb leer - wurde zum Cart umgeleitet');
-		console.log('   [Hinweis: Cart ist clientseitig (localStorage), direkte Navigation funktioniert nicht]');
+		console.log(
+			'   [Hinweis: Cart ist clientseitig (localStorage), direkte Navigation funktioniert nicht]'
+		);
 		// Direkt via localStorage Produkt setzen
 		await page.goto(`${BASE_URL}/products/${PRODUCT_SLUG}`);
 		await page.waitForLoadState('networkidle');
-		const btn = page.locator('button').filter({ hasText: /warenkorb/i }).first();
+		const btn = page
+			.locator('button')
+			.filter({ hasText: /warenkorb/i })
+			.first();
 		await btn.click();
 		await page.waitForTimeout(500);
 		await page.goto(`${BASE_URL}/checkout`);
@@ -104,7 +112,10 @@ async function main() {
 	const currentUrl = page.url();
 	console.log(`   URL nach Submit: ${currentUrl}`);
 
-	const paymentHeading = await page.locator('h2').filter({ hasText: /zahlung/i }).count();
+	const paymentHeading = await page
+		.locator('h2')
+		.filter({ hasText: /zahlung/i })
+		.count();
 	if (paymentHeading > 0) {
 		console.log('   -> Schritt 2 (Zahlung) ist sichtbar');
 		const iframes = await page.locator('iframe').count();

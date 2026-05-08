@@ -1,5 +1,11 @@
 <script>
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
+	import {
+		BUSINESS_CITY,
+		BUSINESS_STREET,
+		BUSINESS_ZIP,
+		EMAIL_INFO,
+		PHONE_INFO
+	} from '$lib/constants';
 </script>
 
 <svelte:head>

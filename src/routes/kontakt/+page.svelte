@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { BUSINESS_CITY, BUSINESS_STREET, BUSINESS_ZIP, EMAIL_INFO, PHONE_INFO } from '$lib/constants';
+	import {
+		BUSINESS_CITY,
+		BUSINESS_STREET,
+		BUSINESS_ZIP,
+		EMAIL_INFO,
+		PHONE_INFO
+	} from '$lib/constants';
 	import { Button, Input, Label, Textarea } from '$lib/components/ui';
 
 	let name = $state('');

@@ -38,7 +38,10 @@ try {
 	await assertFileExists(ENV_FILE, 'Environment file');
 
 	console.log('Preparing build directory...');
-	await writeFile(`${BUILD_DIR}/app.js`, "try { process.loadEnvFile('.env'); } catch {}\nimport('./index.js');\n");
+	await writeFile(
+		`${BUILD_DIR}/app.js`,
+		"try { process.loadEnvFile('.env'); } catch {}\nimport('./index.js');\n"
+	);
 	await writeFile(
 		`${BUILD_DIR}/package.json`,
 		JSON.stringify({ type: 'module', dependencies: { 'better-sqlite3': '>=12' } }, null, 2) + '\n'
@@ -102,7 +105,9 @@ try {
 	await $`rm -f ${LOCAL_ARCHIVE}`;
 
 	console.log('Restarting application...');
-	await remote(`mkdir -p ${quote(REMOTE_DIR + '/tmp')} && touch ${quote(REMOTE_DIR + '/tmp/restart.txt')}`);
+	await remote(
+		`mkdir -p ${quote(REMOTE_DIR + '/tmp')} && touch ${quote(REMOTE_DIR + '/tmp/restart.txt')}`
+	);
 
 	console.log('Deployment completed successfully!');
 } catch (error) {

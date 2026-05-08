@@ -55,10 +55,9 @@
 						{/if}
 					</a>
 					<div class="min-w-0 flex-1">
-						<a
-							href="/products/{item.slug}"
-							class="truncate text-sm font-medium hover:underline"
-						>{lineName}</a>
+						<a href="/products/{item.slug}" class="truncate text-sm font-medium hover:underline"
+							>{lineName}</a
+						>
 						<p class="text-muted-foreground mt-0.5 text-xs">
 							{formatPrice(item.price)}
 							{m.shop_per_piece()}
