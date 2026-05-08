@@ -236,6 +236,24 @@ export async function sendAdminNewOrderNotification(
 	);
 }
 
+export async function sendVerificationEmail(
+	to: string,
+	name: string,
+	token: string
+): Promise<void> {
+	const url = siteUrl();
+	const verifyUrl = `${url}/auth/verify/${token}`;
+	const html = wrap(`
+    <h2 style="margin:0 0 24px;color:#b45309;font-size:20px;">E-Mail-Adresse bestätigen</h2>
+    <p style="margin:0 0 16px;">Herzlich willkommen, ${esc(name)}!</p>
+    <p style="margin:0 0 24px;">Bitte bestätigen Sie Ihre E-Mail-Adresse, um Ihr Konto zu aktivieren. Klicken Sie auf den Button - der Link ist <strong>24 Stunden</strong> gültig.</p>
+    ${ctaButton(verifyUrl, 'E-Mail-Adresse bestätigen')}
+    <p style="margin:24px 0 0;font-size:13px;color:#78716c;font-family:Arial,sans-serif;">Falls Sie dieses Konto nicht erstellt haben, können Sie diese E-Mail ignorieren.</p>
+    <p style="margin:8px 0 0;font-size:12px;color:#a8a29e;font-family:Arial,sans-serif;word-break:break-all;">${verifyUrl}</p>
+  `);
+	await sendMail(to, 'E-Mail-Adresse bestätigen - Hacibaba', html);
+}
+
 export async function sendPasswordResetEmail(to: string, token: string): Promise<void> {
 	const url = siteUrl();
 	const resetUrl = `${url}/auth/reset/${token}`;

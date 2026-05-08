@@ -3,8 +3,8 @@ import type { Actions, PageServerLoad } from './$types';
 import bcrypt from 'bcryptjs';
 import db from '$lib/server/db';
 import { customersTable } from '$lib/server/schema';
-import { createCustomerSession, linkGuestOrders } from '$lib/server/auth';
-import { sendWelcomeEmail } from '$lib/server/email';
+import { createEmailVerificationToken, linkGuestOrders } from '$lib/server/auth';
+import { sendVerificationEmail } from '$lib/server/email';
 import { registerSchema } from '$lib/server/validation';
 import { eq } from 'drizzle-orm';
 
@@ -46,8 +46,8 @@ export const actions: Actions = {
 			.all();
 
 		linkGuestOrders(customer.id, email);
-		await createCustomerSession(customer.id, event);
-		sendWelcomeEmail(email, name).catch(console.error);
-		redirect(302, '/account');
+		const token = createEmailVerificationToken(customer.id);
+		sendVerificationEmail(email, name, token).catch(console.error);
+		redirect(302, `/auth/verify-pending?email=${encodeURIComponent(email)}`);
 	}
 };

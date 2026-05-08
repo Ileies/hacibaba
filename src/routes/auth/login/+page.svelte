@@ -36,6 +36,14 @@
 		<CardContent class="space-y-4">
 			{#if $page.url.searchParams.get('reset') === 'success'}
 				<Alert class="text-sm">{m.shop_reset_success()}</Alert>
+			{:else if form?.error === 'email_not_verified'}
+				<Alert variant="destructive" class="text-sm">
+					{m.shop_email_not_verified()}
+					<a
+						href="/auth/verify-pending?email={encodeURIComponent(form.email)}"
+						class="mt-1 block font-medium underline">{m.shop_verify_email_resend()}</a
+					>
+				</Alert>
 			{:else if form?.error}
 				<Alert variant="destructive" class="text-sm">
 					{m.shop_login_error()}

@@ -52,6 +52,9 @@ export const customersTable = sqliteTable(
 		name: text('name').notNull(),
 		passwordHash: text('password_hash'), // null for OAuth-only accounts
 		isBlocked: integer('is_blocked', { mode: 'boolean' }).notNull().default(false),
+		emailVerified: integer('email_verified', { mode: 'boolean' }).notNull().default(false),
+		emailVerificationToken: text('email_verification_token'),
+		emailVerificationTokenExpiresAt: text('email_verification_token_expires_at'),
 		createdAt: text('created_at')
 			.default(sql`(CURRENT_TIMESTAMP)`)
 			.notNull()

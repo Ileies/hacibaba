@@ -344,7 +344,7 @@
 		"Şifreniz sıfırlandı. Lütfen giriş yapın."
 	],
 	"footer_trust_ssl": ["SSL-verschlüsselt", "SSL encrypted", "SSL şifreli"],
-"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
+	"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
 	"footer_trust_gogreen": [
 		"Klimaneutraler Versand",
 		"Carbon-neutral shipping",
@@ -486,9 +486,5 @@
 		"Please verify your email address first.",
 		"Lütfen önce e-posta adresinizi doğrulayın."
 	],
-	"shop_verify_email_cta": [
-		"E-Mail bestätigen",
-		"Verify email",
-		"E-postayı doğrula"
-	]
+	"shop_verify_email_cta": ["E-Mail bestätigen", "Verify email", "E-postayı doğrula"]
 }

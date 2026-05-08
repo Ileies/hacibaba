@@ -26,6 +26,16 @@ function sessionExpiresAt(): string {
 	return new Date(Date.now() + SESSION_DURATION_MS).toISOString();
 }
 
+export function createEmailVerificationToken(customerId: number): string {
+	const token = generateSessionToken();
+	const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+	db.update(customersTable)
+		.set({ emailVerificationToken: token, emailVerificationTokenExpiresAt: expiresAt })
+		.where(eq(customersTable.id, customerId))
+		.run();
+	return token;
+}
+
 export function linkGuestOrders(customerId: number, email: string): void {
 	db.update(ordersTable)
 		.set({ customerId })
@@ -125,10 +135,15 @@ export async function findOrCreateOauthCustomer(
 	if (!customer) {
 		const [created] = db
 			.insert(customersTable)
-			.values({ email, name })
+			.values({ email, name, emailVerified: true })
 			.returning({ id: customersTable.id })
 			.all();
 		customer = created;
+	} else {
+		db.update(customersTable)
+			.set({ emailVerified: true })
+			.where(eq(customersTable.id, customer.id))
+			.run();
 	}
 
 	db.insert(oauthAccountsTable).values({ provider, providerUserId, customerId: customer.id }).run();

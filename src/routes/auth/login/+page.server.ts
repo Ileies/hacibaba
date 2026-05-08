@@ -31,6 +31,10 @@ export const actions: Actions = {
 		const valid = await bcrypt.compare(password, customer.passwordHash);
 		if (!valid) return fail(401, { error: true });
 
+		if (!customer.emailVerified) {
+			return fail(403, { error: 'email_not_verified' as const, email });
+		}
+
 		await createCustomerSession(customer.id, event);
 
 		const redirectTo = event.url.searchParams.get('redirectTo') ?? '/account';
