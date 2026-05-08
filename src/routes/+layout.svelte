@@ -152,7 +152,7 @@
 					onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 					aria-label={mobileMenuOpen ? m.common_menu_close() : m.common_menu_open()}
 					aria-expanded={mobileMenuOpen}
-					class="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors md:hidden"
+					class="text-muted-foreground hover:text-foreground hover:bg-accent inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md transition-colors md:hidden"
 				>
 					{#if mobileMenuOpen}
 						<X size={20} />
@@ -189,7 +189,7 @@
 		>
 			<!-- Backdrop -->
 			<button
-				class="absolute inset-0 bg-black/30"
+				class="absolute inset-0 cursor-pointer bg-black/30"
 				onclick={() => (mobileMenuOpen = false)}
 				aria-label={m.common_menu_close()}
 				tabindex="-1"
@@ -267,7 +267,7 @@
 		<button
 			onclick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
 			aria-label={m.common_back_to_top()}
-			class="bg-background border-border text-muted-foreground hover:text-foreground fixed right-4 bottom-36 z-40 flex h-10 w-10 items-center justify-center rounded-full border shadow-md transition-all duration-200 md:right-6 md:bottom-20"
+			class="bg-background border-border text-muted-foreground hover:text-foreground fixed right-4 bottom-36 z-40 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border shadow-md transition-all duration-200 md:right-6 md:bottom-20"
 		>
 			<ArrowUp size={18} />
 		</button>
@@ -322,75 +322,39 @@
 			</div>
 
 			<!-- Rechtliches -->
-			<div>
+			<div class="col-span-2 md:col-span-1">
 				<h3 class="mb-4 font-semibold">{m.footer_legal()}</h3>
-				<ul class="space-y-2.5">
-					<li>
-						<a href="/faq" class="text-muted-foreground hover:text-foreground transition-colors"
-							>FAQ</a
-						>
-					</li>
-					<li>
-						<a href="/kontakt" class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_contact()}</a
-						>
-					</li>
-					<li>
-						<a
-							href="/impressum"
-							class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_imprint()}</a
-						>
-					</li>
-					<li>
-						<a
-							href="/datenschutz"
-							class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_privacy()}</a
-						>
-					</li>
-					<li>
-						<a href="/agb" class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_terms()}</a
-						>
-					</li>
-					<li>
-						<a
-							href="/widerruf"
-							class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_withdrawal()}</a
-						>
-					</li>
-					<li>
-						<a
-							href="/lieferbedingungen"
-							class="text-muted-foreground hover:text-foreground transition-colors"
-							>{m.footer_shipping()}</a
-						>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-		<!-- Trust badges (#71, #147) -->
-		<div class="border-border border-t">
-			<div class="container mx-auto flex flex-wrap justify-center gap-4 px-4 py-4">
-				<span class="text-muted-foreground flex items-center gap-1.5 text-xs">
-					<span class="text-primary">🔒</span>
-					{m.footer_trust_ssl()}
-				</span>
-				<span class="text-muted-foreground flex items-center gap-1.5 text-xs">
-					<span>💳</span>
-					{m.footer_trust_stripe()}
-				</span>
-				<span class="text-muted-foreground flex items-center gap-1.5 text-xs">
-					<span>↩</span>
-					{m.footer_trust_returns()}
-				</span>
-				<span class="text-muted-foreground flex items-center gap-1.5 text-xs">
-					<span class="text-green-600">🌿</span>
-					{m.footer_trust_gogreen()}
-				</span>
+				<div class="grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm">
+					<a href="/faq" class="text-muted-foreground hover:text-foreground transition-colors"
+						>FAQ</a
+					>
+					<a href="/agb" class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_terms()}</a
+					>
+					<a href="/kontakt" class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_contact()}</a
+					>
+					<a
+						href="/widerruf"
+						class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_withdrawal()}</a
+					>
+					<a
+						href="/impressum"
+						class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_imprint()}</a
+					>
+					<a
+						href="/lieferbedingungen"
+						class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_shipping()}</a
+					>
+					<a
+						href="/datenschutz"
+						class="text-muted-foreground hover:text-foreground transition-colors"
+						>{m.footer_privacy()}</a
+					>
+				</div>
 			</div>
 		</div>
 
@@ -401,7 +365,22 @@
 			>
 				<span>&copy; {new Date().getFullYear()} Hacibaba. {m.footer_copyright()}</span>
 
-				<div class="flex items-center gap-4">
+				<div class="flex flex-wrap items-center justify-center gap-3">
+					<span class="flex items-center gap-1.5">
+						<span class="text-primary">🔒</span>
+						{m.footer_trust_ssl()}
+					</span>
+					<span class="flex items-center gap-1.5">
+						<span>↩</span>
+						{m.footer_trust_returns()}
+					</span>
+					<span class="flex items-center gap-1.5">
+						<span class="text-green-600">🌿</span>
+						{m.footer_trust_gogreen()}
+					</span>
+
+					<span class="opacity-20">|</span>
+
 					<!-- Payment methods -->
 					<div class="flex items-center gap-1.5">
 						<!-- Visa -->

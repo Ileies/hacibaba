@@ -344,8 +344,7 @@
 		"Şifreniz sıfırlandı. Lütfen giriş yapın."
 	],
 	"footer_trust_ssl": ["SSL-verschlüsselt", "SSL encrypted", "SSL şifreli"],
-	"footer_trust_stripe": ["Zahlung via Stripe", "Payment via Stripe", "Stripe ile ödeme"],
-	"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
+"footer_trust_returns": ["14 Tage Rückgabe", "14-day returns", "14 gün iade"],
 	"footer_trust_gogreen": [
 		"Klimaneutraler Versand",
 		"Carbon-neutral shipping",
@@ -460,5 +459,36 @@
 		"Bitte Hausnummer angeben",
 		"Please include house number",
 		"Lütfen kapı numarasını girin"
+	],
+	"shop_verify_email_title": [
+		"E-Mail-Adresse bestätigen",
+		"Verify email address",
+		"E-posta adresinizi doğrulayın"
+	],
+	"shop_verify_email_desc": [
+		"Wir haben Ihnen einen Bestätigungslink an {email} gesendet. Bitte prüfen Sie Ihr Postfach und klicken Sie auf den Link.",
+		"We sent a confirmation link to {email}. Please check your inbox and click the link.",
+		"{email} adresine bir doğrulama bağlantısı gönderdik. Lütfen gelen kutunuzu kontrol edin."
+	],
+	"shop_verify_email_resend": ["Link erneut senden", "Resend link", "Bağlantıyı yeniden gönder"],
+	"shop_verify_email_resent": [
+		"E-Mail wurde erneut gesendet. Bitte prüfen Sie Ihr Postfach.",
+		"Email sent. Please check your inbox.",
+		"E-posta tekrar gönderildi. Lütfen gelen kutunuzu kontrol edin."
+	],
+	"shop_verify_email_invalid": [
+		"Der Bestätigungslink ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an.",
+		"The confirmation link is invalid or expired. Please request a new one.",
+		"Doğrulama bağlantısı geçersiz veya süresi dolmuş. Lütfen yenisini isteyin."
+	],
+	"shop_email_not_verified": [
+		"Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse.",
+		"Please verify your email address first.",
+		"Lütfen önce e-posta adresinizi doğrulayın."
+	],
+	"shop_verify_email_cta": [
+		"E-Mail bestätigen",
+		"Verify email",
+		"E-postayı doğrula"
 	]
 }
