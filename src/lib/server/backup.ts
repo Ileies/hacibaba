@@ -1,4 +1,4 @@
-import { unlink } from 'fs/promises';
+import { unlink, readdir, mkdir, copyFile } from 'fs/promises';
 import { join } from 'path';
 
 const DB_PATH = process.env.DB_PATH ?? join(process.cwd(), 'db.sqlite');
@@ -7,10 +7,14 @@ const MAX_BACKUPS = 10;
 const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
 async function getLatestBackupTime(): Promise<number> {
-	const files: string[] = [];
-	for await (const f of new Bun.Glob('db-*.sqlite').scan(BACKUPS_DIR)) files.push(f);
+	let entries: string[];
+	try {
+		entries = await readdir(BACKUPS_DIR);
+	} catch {
+		return 0;
+	}
+	const files = entries.filter((f) => /^db-.*\.sqlite$/.test(f)).sort();
 	if (files.length === 0) return 0;
-	files.sort();
 	const latest = files[files.length - 1];
 	const match = latest.match(/db-(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
 	if (!match) return 0;
@@ -18,7 +22,7 @@ async function getLatestBackupTime(): Promise<number> {
 }
 
 export async function backupDatabase() {
-	await Bun.$`mkdir -p ${BACKUPS_DIR}`.quiet();
+	await mkdir(BACKUPS_DIR, { recursive: true });
 
 	const lastBackup = await getLatestBackupTime();
 	if (Date.now() - lastBackup < MIN_INTERVAL_MS) {
@@ -28,12 +32,11 @@ export async function backupDatabase() {
 
 	const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
 	const dest = join(BACKUPS_DIR, `db-${timestamp}.sqlite`);
-	await Bun.write(dest, Bun.file(DB_PATH));
+	await copyFile(DB_PATH, dest);
 	console.log(`[backup] Database backed up to backups/db-${timestamp}.sqlite`);
 
-	const files: string[] = [];
-	for await (const f of new Bun.Glob('db-*.sqlite').scan(BACKUPS_DIR)) files.push(f);
-	files.sort();
+	const entries = await readdir(BACKUPS_DIR);
+	const files = entries.filter((f) => /^db-.*\.sqlite$/.test(f)).sort();
 	for (const old of files.slice(0, -MAX_BACKUPS)) {
 		await unlink(join(BACKUPS_DIR, old)).catch(() => {});
 	}

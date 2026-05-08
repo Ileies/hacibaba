@@ -1,5 +1,6 @@
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import bcrypt from 'bcryptjs';
 import db from '$lib/server/db';
 import { customersTable, passwordResetTokensTable } from '$lib/server/schema';
 import { passwordResetConfirmSchema } from '$lib/server/validation';
@@ -50,7 +51,7 @@ export const actions: Actions = {
 
 		if (!resetToken) return fail(400, { error: 'expired' });
 
-		const passwordHash = await Bun.password.hash(password, { algorithm: 'bcrypt', cost: 12 });
+		const passwordHash = await bcrypt.hash(password, 12);
 		db.update(customersTable)
 			.set({ passwordHash })
 			.where(eq(customersTable.email, resetToken.email))

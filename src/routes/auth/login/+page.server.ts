@@ -1,5 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import bcrypt from 'bcryptjs';
 import db from '$lib/server/db';
 import { customersTable } from '$lib/server/schema';
 import { createCustomerSession } from '$lib/server/auth';
@@ -27,7 +28,7 @@ export const actions: Actions = {
 
 		if (!customer?.passwordHash) return fail(401, { error: true });
 
-		const valid = await Bun.password.verify(password, customer.passwordHash);
+		const valid = await bcrypt.compare(password, customer.passwordHash);
 		if (!valid) return fail(401, { error: true });
 
 		await createCustomerSession(customer.id, event);

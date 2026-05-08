@@ -10,6 +10,6 @@
 		"sourceMap": true,
 		"strict": true,
 		"noFallthroughCasesInSwitch": true,
-		"types": ["bun-types"]
+		"types": ["node"]
 	}
 }
