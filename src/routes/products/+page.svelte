@@ -72,7 +72,7 @@
 		<p class="text-muted-foreground shrink-0 text-sm">{data.products.length} {m.common_items()}</p>
 		<button
 			onclick={() => (showFilters = !showFilters)}
-			class="border-input hover:bg-accent inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm transition-colors {hasFilters
+			class="border-input hover:bg-accent inline-flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm transition-colors {hasFilters
 				? 'border-primary text-primary'
 				: ''}"
 			aria-expanded={showFilters}

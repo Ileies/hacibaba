@@ -9,8 +9,8 @@
 		<div
 			transition:fly={{ x: 80, duration: 200 }}
 			class="pointer-events-auto flex items-start gap-3 rounded-lg border px-4 py-3 shadow-lg
-				{toast.type === 'success' ? 'bg-primary/5 border-primary/30' : ''}
-				{toast.type === 'error' ? 'bg-destructive/5 border-destructive/30' : ''}
+				{toast.type === 'success' ? 'bg-card border-primary/40' : ''}
+				{toast.type === 'error' ? 'bg-card border-destructive/40' : ''}
 				{toast.type === 'info' ? 'bg-card border-border' : ''}"
 		>
 			{#if toast.type === 'success'}
@@ -23,7 +23,7 @@
 			<p class="flex-1 text-sm">{toast.message}</p>
 			<button
 				onclick={() => toasts.remove(toast.id)}
-				class="text-muted-foreground hover:text-foreground shrink-0 transition-colors"
+				class="text-muted-foreground hover:text-foreground -mr-1 -mt-0.5 flex shrink-0 cursor-pointer items-center justify-center rounded p-1.5 transition-colors hover:bg-black/5"
 				aria-label="Schließen"
 			>
 				<X size={14} />

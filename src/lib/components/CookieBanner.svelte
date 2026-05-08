@@ -3,11 +3,10 @@
 	import * as m from '$lib/messages';
 
 	let { show = false }: { show: boolean } = $props();
-	let visible = $state(false);
+	let visible = $state(show);
 	let acceptBtn = $state<HTMLButtonElement | null>(null);
 
 	$effect(() => {
-		visible = show;
 		if (visible) {
 			tick().then(() => acceptBtn?.focus());
 		}
@@ -40,7 +39,7 @@
 			<button
 				bind:this={acceptBtn}
 				onclick={accept}
-				class="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0 rounded-md px-4 py-1.5 text-sm font-medium transition-colors"
+				class="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0 cursor-pointer rounded-md px-4 py-1.5 text-sm font-medium transition-colors"
 			>
 				{m.cookie_banner_accept()}
 			</button>
