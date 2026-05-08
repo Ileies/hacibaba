@@ -18,6 +18,7 @@
 		MapPin
 	} from 'lucide-svelte';
 	import * as m from '$lib/messages';
+	import { cart } from '$lib/states.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -91,7 +92,14 @@
 
 	onMount(() => {
 		const hash = window.location.hash.slice(1) as Section;
-		const valid: Section[] = ['orders', 'addresses', 'profile', 'security', 'newsletter', 'privacy'];
+		const valid: Section[] = [
+			'orders',
+			'addresses',
+			'profile',
+			'security',
+			'newsletter',
+			'privacy'
+		];
 		if (valid.includes(hash)) activeSection = hash;
 	});
 
@@ -145,7 +153,13 @@
 
 			<Separator class="my-3" />
 
-			<form action="/auth/logout" method="POST">
+			<form
+				action="/auth/logout"
+				method="POST"
+				use:enhance={() => {
+					cart.clear();
+				}}
+			>
 				<button
 					type="submit"
 					class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors"
@@ -435,7 +449,9 @@
 											{#if !addr.isDefault}
 												<form method="POST" action="?/setDefaultAddress" use:enhance>
 													<input type="hidden" name="id" value={addr.id} />
-													<button type="submit" class="text-primary cursor-pointer text-xs hover:underline"
+													<button
+														type="submit"
+														class="text-primary cursor-pointer text-xs hover:underline"
 														>{m.account_address_set_default()}</button
 													>
 												</form>
@@ -462,7 +478,9 @@
 											</button>
 											<form method="POST" action="?/deleteAddress" use:enhance>
 												<input type="hidden" name="id" value={addr.id} />
-												<button type="submit" class="text-destructive cursor-pointer text-xs hover:underline"
+												<button
+													type="submit"
+													class="text-destructive cursor-pointer text-xs hover:underline"
 													>{m.common_delete()}</button
 												>
 											</form>
@@ -668,6 +686,7 @@
 							action="?/deleteAccount"
 							use:enhance={() => {
 								deleting = true;
+								cart.clear();
 								return async ({ update }) => {
 									await update();
 									deleting = false;
