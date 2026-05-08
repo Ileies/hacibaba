@@ -230,7 +230,7 @@
 		const { error: stripeError } = await stripeInstance.confirmPayment({
 			elements: elementsInstance,
 			confirmParams: {
-				return_url: `${env.PUBLIC_SITE_URL}/checkout/confirmation?order=${orderNumber}`
+				return_url: `${window.location.origin}/checkout/confirmation?order=${orderNumber}`
 			}
 		});
 		if (stripeError) {
@@ -494,7 +494,7 @@
 							<button
 								type="button"
 								onclick={goBackToShipping}
-								class="text-primary shrink-0 text-xs hover:underline"
+								class="text-primary shrink-0 cursor-pointer text-xs hover:underline"
 							>
 								{m.shop_back_to_shipping()}
 							</button>

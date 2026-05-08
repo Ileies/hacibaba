@@ -1,9 +1,16 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui';
+	import { cart } from '$lib/states.svelte';
 	import * as m from '$lib/messages';
 
 	const orderNumber = $derived(page.url.searchParams.get('order') ?? '');
+
+	onMount(async () => {
+		await cart.load();
+		cart.clear();
+	});
 </script>
 
 <svelte:head><title>{m.shop_order_confirmed()} - {m.shop_title()}</title></svelte:head>
