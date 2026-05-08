@@ -98,7 +98,7 @@
 				<div class="flex gap-2 overflow-x-auto pb-1" role="group" aria-label={m.product_images()}>
 					{#each allImages as img, i (i)}
 						<button
-							class="h-16 w-16 shrink-0 overflow-hidden rounded-lg ring-2 transition-all {activeImage ===
+							class="h-16 w-16 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-2 transition-all {activeImage ===
 							img
 								? 'ring-primary'
 								: 'hover:ring-border ring-transparent'}"
@@ -176,14 +176,14 @@
 				<div class="mb-6 flex items-center gap-3">
 					<div class="border-input flex items-center rounded-md border">
 						<button
-							class="text-muted-foreground hover:text-foreground flex h-10 w-10 items-center justify-center transition-colors disabled:opacity-40"
+							class="text-muted-foreground hover:text-foreground flex h-10 w-10 cursor-pointer items-center justify-center transition-colors disabled:opacity-40"
 							aria-label={m.common_qty_decrease()}
 							onclick={() => quantity > 1 && quantity--}
 							disabled={quantity <= 1}>−</button
 						>
 						<span class="w-10 text-center text-sm font-medium" aria-live="polite">{quantity}</span>
 						<button
-							class="text-muted-foreground hover:text-foreground flex h-10 w-10 items-center justify-center transition-colors"
+							class="text-muted-foreground hover:text-foreground flex h-10 w-10 cursor-pointer items-center justify-center transition-colors"
 							aria-label={m.common_qty_increase()}
 							onclick={() => quantity++}>+</button
 						>
@@ -193,6 +193,7 @@
 						onclick={() => {
 							cart.add({
 								productId: data.product.id,
+								slug: data.product.slug,
 								name_de: data.product.name_de,
 								name_en: data.product.name_en,
 								name_tr: data.product.name_tr,
@@ -353,6 +354,7 @@
 			onclick={() => {
 				cart.add({
 					productId: data.product.id,
+					slug: data.product.slug,
 					name_de: data.product.name_de,
 					name_en: data.product.name_en,
 					name_tr: data.product.name_tr,

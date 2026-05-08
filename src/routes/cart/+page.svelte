@@ -43,17 +43,22 @@
 			{#each cart.items as item (item.productId)}
 				{@const lineName = localizedName(item, data.locale)}
 				<div class="border-border flex items-center gap-4 border-b py-4 last:border-0">
-					{#if item.imageUrl}
-						<img
-							src={item.imageUrl}
-							alt={lineName}
-							class="bg-secondary/30 h-16 w-16 shrink-0 rounded-lg object-cover"
-						/>
-					{:else}
-						<div class="bg-secondary/30 h-16 w-16 shrink-0 rounded-lg"></div>
-					{/if}
+					<a href="/products/{item.slug}" class="shrink-0">
+						{#if item.imageUrl}
+							<img
+								src={item.imageUrl}
+								alt={lineName}
+								class="bg-secondary/30 h-16 w-16 rounded-lg object-cover"
+							/>
+						{:else}
+							<div class="bg-secondary/30 h-16 w-16 rounded-lg"></div>
+						{/if}
+					</a>
 					<div class="min-w-0 flex-1">
-						<p class="truncate text-sm font-medium">{lineName}</p>
+						<a
+							href="/products/{item.slug}"
+							class="truncate text-sm font-medium hover:underline"
+						>{lineName}</a>
 						<p class="text-muted-foreground mt-0.5 text-xs">
 							{formatPrice(item.price)}
 							{m.shop_per_piece()}
@@ -65,7 +70,7 @@
 					</div>
 					<div class="border-input flex shrink-0 items-center rounded-md border">
 						<button
-							class="text-muted-foreground hover:text-foreground flex h-8 w-8 items-center justify-center text-sm transition-colors"
+							class="text-muted-foreground hover:text-foreground flex h-8 w-8 cursor-pointer items-center justify-center text-sm transition-colors"
 							aria-label={m.common_qty_decrease()}
 							onclick={() => cart.update(item.productId, item.quantity - 1)}>−</button
 						>
@@ -87,7 +92,7 @@
 							}}
 						/>
 						<button
-							class="text-muted-foreground hover:text-foreground flex h-8 w-8 items-center justify-center text-sm transition-colors"
+							class="text-muted-foreground hover:text-foreground flex h-8 w-8 cursor-pointer items-center justify-center text-sm transition-colors"
 							aria-label={m.common_qty_increase()}
 							onclick={() => cart.update(item.productId, item.quantity + 1)}>+</button
 						>
@@ -96,7 +101,7 @@
 						>{formatPrice(item.price * item.quantity)}</span
 					>
 					<button
-						class="text-muted-foreground hover:text-destructive shrink-0 transition-colors"
+						class="text-muted-foreground hover:text-destructive -mr-1 shrink-0 cursor-pointer p-2 transition-colors"
 						onclick={() => cart.remove(item.productId)}
 						aria-label={m.common_remove()}
 					>

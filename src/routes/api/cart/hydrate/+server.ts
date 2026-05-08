@@ -26,6 +26,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const rows = db
 		.select({
 			id: productsTable.id,
+			slug: productsTable.slug,
 			name_tr: productsTable.name_tr,
 			name_de: productsTable.name_de,
 			name_en: productsTable.name_en,
@@ -47,6 +48,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		const imageUrl = parsedP.imageUrl ?? parsedP.images?.[0] ?? null;
 		out.push({
 			productId: p.id,
+			slug: p.slug,
 			name_de: p.name_de,
 			name_en: p.name_en,
 			name_tr: p.name_tr,

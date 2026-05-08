@@ -110,6 +110,7 @@
 					onclick={() =>
 						cart.add({
 							productId: product.id,
+							slug: product.slug,
 							name_de: product.name_de,
 							name_en: product.name_en,
 							name_tr: product.name_tr,
