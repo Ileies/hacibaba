@@ -1,5 +1,6 @@
 import { redirect, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import bcrypt from 'bcryptjs';
 import { requireCustomer, deleteCustomerSession } from '$lib/server/auth';
 import db from '$lib/server/db';
 import {
@@ -58,6 +59,23 @@ export const load: PageServerLoad = (event) => {
 };
 
 export const actions: Actions = {
+	updateProfile: async (event) => {
+		requireCustomer(event);
+		const formData = await event.request.formData();
+		const firstName = String(formData.get('firstName') ?? '').trim();
+		const lastName = String(formData.get('lastName') ?? '').trim();
+
+		if (!firstName || !lastName) return fail(400, { profileError: 'missing_fields' as const });
+
+		const name = `${firstName} ${lastName}`;
+		db.update(customersTable)
+			.set({ name })
+			.where(eq(customersTable.id, event.locals.customerId!))
+			.run();
+
+		return { profileSuccess: true as const };
+	},
+
 	changePassword: async (event) => {
 		requireCustomer(event);
 		const formData = await event.request.formData();
@@ -76,10 +94,10 @@ export const actions: Actions = {
 
 		if (!customer?.passwordHash) return fail(400, { passwordError: 'no_password' as const });
 
-		const valid = await Bun.password.verify(currentPassword, customer.passwordHash);
+		const valid = await bcrypt.compare(currentPassword, customer.passwordHash);
 		if (!valid) return fail(400, { passwordError: 'wrong' as const });
 
-		const passwordHash = await Bun.password.hash(newPassword, { algorithm: 'bcrypt', cost: 12 });
+		const passwordHash = await bcrypt.hash(newPassword, 12);
 		db.update(customersTable)
 			.set({ passwordHash })
 			.where(eq(customersTable.id, event.locals.customerId!))

@@ -63,11 +63,12 @@
 		isDefault: false
 	});
 
-	type Section = 'orders' | 'addresses' | 'security' | 'newsletter' | 'privacy';
+	type Section = 'orders' | 'addresses' | 'profile' | 'security' | 'newsletter' | 'privacy';
 
 	const navItems: { id: Section; label: string; icon: typeof User }[] = [
 		{ id: 'orders', label: m.shop_my_orders(), icon: Package },
 		{ id: 'addresses', label: m.account_addresses_heading(), icon: MapPin },
+		{ id: 'profile', label: 'Profil', icon: User },
 		{ id: 'security', label: m.account_password_change_heading(), icon: Lock },
 		{ id: 'newsletter', label: m.account_newsletter_heading(), icon: Mail },
 		{ id: 'privacy', label: m.account_export_heading(), icon: Download }
@@ -90,7 +91,7 @@
 
 	onMount(() => {
 		const hash = window.location.hash.slice(1) as Section;
-		const valid: Section[] = ['orders', 'addresses', 'security', 'newsletter', 'privacy'];
+		const valid: Section[] = ['orders', 'addresses', 'profile', 'security', 'newsletter', 'privacy'];
 		if (valid.includes(hash)) activeSection = hash;
 	});
 
@@ -128,7 +129,7 @@
 				{#each navItems as item (item.id)}
 					<button
 						onclick={() => setSection(item.id)}
-						class="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors
+						class="flex w-full cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors
 						{activeSection === item.id
 							? 'bg-primary/10 text-primary'
 							: 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'}"
@@ -147,7 +148,7 @@
 			<form action="/auth/logout" method="POST">
 				<button
 					type="submit"
-					class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors"
+					class="text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full cursor-pointer items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors"
 				>
 					<LogOut size={15} class="shrink-0" />
 					{m.shop_logout()}
@@ -177,7 +178,7 @@
 							{#each data.orders as order (order.id)}
 								<div class="border-border bg-card rounded-lg border">
 									<button
-										class="flex w-full items-center gap-4 p-4 text-left"
+										class="flex w-full cursor-pointer items-center gap-4 p-4 text-left"
 										onclick={() => toggleOrder(order.id)}
 									>
 										<div class="min-w-0 flex-1">
@@ -252,7 +253,7 @@
 													href="https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?idc={order.trackingNumber}"
 													target="_blank"
 													rel="noopener noreferrer"
-													class="text-primary mt-3 inline-flex items-center gap-1.5 text-xs hover:underline"
+													class="text-primary mt-3 inline-flex cursor-pointer items-center gap-1.5 text-xs hover:underline"
 												>
 													<ExternalLink size={12} />
 													{m.account_order_track()} ({order.trackingNumber})
@@ -434,7 +435,7 @@
 											{#if !addr.isDefault}
 												<form method="POST" action="?/setDefaultAddress" use:enhance>
 													<input type="hidden" name="id" value={addr.id} />
-													<button type="submit" class="text-primary text-xs hover:underline"
+													<button type="submit" class="text-primary cursor-pointer text-xs hover:underline"
 														>{m.account_address_set_default()}</button
 													>
 												</form>
@@ -455,13 +456,13 @@
 													};
 													showAddressForm = true;
 												}}
-												class="text-muted-foreground hover:text-foreground text-xs hover:underline"
+												class="text-muted-foreground hover:text-foreground cursor-pointer text-xs hover:underline"
 											>
 												{m.common_edit()}
 											</button>
 											<form method="POST" action="?/deleteAddress" use:enhance>
 												<input type="hidden" name="id" value={addr.id} />
-												<button type="submit" class="text-destructive text-xs hover:underline"
+												<button type="submit" class="text-destructive cursor-pointer text-xs hover:underline"
 													>{m.common_delete()}</button
 												>
 											</form>
@@ -471,6 +472,60 @@
 							{/each}
 						</div>
 					{/if}
+				</div>
+
+				<!-- Profile -->
+			{:else if activeSection === 'profile'}
+				<div class="max-w-md">
+					<h2 class="mb-1 text-xl font-semibold">Profil bearbeiten</h2>
+					<p class="text-muted-foreground mb-6 text-sm">
+						Dein Name wird beim Checkout automatisch eingetragen.
+					</p>
+
+					{#if form?.profileSuccess}
+						<div class="bg-primary/10 text-primary mb-4 rounded-md px-4 py-3 text-sm font-medium">
+							Name erfolgreich aktualisiert.
+						</div>
+					{/if}
+					{#if form?.profileError === 'missing_fields'}
+						<div class="bg-destructive/10 text-destructive mb-4 rounded-md px-4 py-3 text-sm">
+							Bitte Vor- und Nachname ausfüllen.
+						</div>
+					{/if}
+
+					<form method="POST" action="?/updateProfile" use:enhance class="space-y-4">
+						<div class="space-y-1.5">
+							<Label for="profileFirstName">{m.shop_first_name()}</Label>
+							<Input
+								id="profileFirstName"
+								name="firstName"
+								type="text"
+								value={data.customer.name.split(' ')[0]}
+								autocomplete="given-name"
+								required
+							/>
+						</div>
+						<div class="space-y-1.5">
+							<Label for="profileLastName">{m.shop_last_name()}</Label>
+							<Input
+								id="profileLastName"
+								name="lastName"
+								type="text"
+								value={data.customer.name.split(' ').slice(1).join(' ')}
+								autocomplete="family-name"
+								required
+							/>
+						</div>
+						<div class="space-y-1.5">
+							<Label>{m.shop_email()}</Label>
+							<div
+								class="border-input bg-muted text-muted-foreground flex h-10 w-full items-center rounded-md border px-3 text-sm"
+							>
+								{data.customer.email}
+							</div>
+						</div>
+						<Button type="submit">{m.common_save()}</Button>
+					</form>
 				</div>
 
 				<!-- Security -->
@@ -599,7 +654,7 @@
 					<div class="border-destructive/30 rounded-lg border p-5">
 						<div class="mb-3 flex items-start gap-3">
 							<div
-								class="bg-destructive/10 mt-0.5 flex h-8 w-8 items-center justify-center rounded-md"
+								class="bg-destructive/10 mt-0.5 flex h-8 shrink-0 items-center justify-center rounded-md px-2.5"
 							>
 								<Trash2 size={15} class="text-destructive" />
 							</div>
