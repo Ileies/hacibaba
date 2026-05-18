@@ -34,13 +34,17 @@
 	<section class="container mx-auto px-4 pt-10 pb-16">
 		<div class="mb-8 flex items-center justify-between">
 			<h2 class="text-2xl font-semibold tracking-tight">{m.shop_featured_products()}</h2>
-			<a href="/products" class="text-primary text-sm font-medium hover:underline"
+			<a
+				href="/products"
+				class="border-border text-primary hover:bg-secondary rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
 				>{m.shop_show_all()}</a
 			>
 		</div>
-		<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-			{#each data.featured as product (product.id)}
-				<ProductCard {product} />
+		<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+			{#each data.featured as product, i (product.id)}
+				<div class={i === 9 ? 'sm:hidden lg:block' : i === 8 ? 'md:hidden lg:block' : ''}>
+					<ProductCard {product} />
+				</div>
 			{/each}
 		</div>
 	</section>

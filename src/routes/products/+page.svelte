@@ -239,7 +239,7 @@
 			</button>
 		</div>
 	{:else}
-		<div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+		<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 			{#each data.products as product (product.id)}
 				<ProductCard {product} compact />
 			{/each}

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { cart } from '$lib/states.svelte';
 	import { formatPrice, activeTags } from '$lib/types';
-	import { Button } from '$lib/components/ui';
 	import * as m from '$lib/messages';
 
 	let {
@@ -38,7 +36,7 @@
 >
 	<a
 		href="/products/{product.slug}"
-		class="bg-secondary/20 relative block aspect-square overflow-hidden"
+		class="bg-secondary/20 relative block aspect-[4/3] overflow-hidden"
 	>
 		{#if tags.includes('bestseller') || tags.includes('neu')}
 			<div class="absolute top-2 left-2 z-10 flex flex-col gap-1">
@@ -91,35 +89,15 @@
 				{/each}
 			</div>
 		{/if}
-		<div class="flex items-center justify-between {compact ? 'mt-2' : 'mt-3'}">
-			<div class="flex items-baseline gap-2">
-				<span class="font-semibold{compact ? ' text-sm' : ''}">{formatPrice(product.price)}</span>
-				{#if product.originalPrice && product.originalPrice > product.price}
-					<span class="text-muted-foreground text-xs line-through"
-						>{formatPrice(product.originalPrice)}</span
-					>
-				{/if}
-			</div>
+		<div class="flex items-center gap-2 {compact ? 'mt-2' : 'mt-3'}">
+			<span class="font-semibold{compact ? ' text-sm' : ''}">{formatPrice(product.price)}</span>
+			{#if product.originalPrice && product.originalPrice > product.price}
+				<span class="text-muted-foreground text-xs line-through"
+					>{formatPrice(product.originalPrice)}</span
+				>
+			{/if}
 			{#if isOutOfStock}
 				<span class="text-muted-foreground text-xs">{m.shop_out_of_stock()}</span>
-			{:else}
-				<Button
-					size="sm"
-					variant="outline"
-					class={compact ? 'h-7 px-2 text-xs' : ''}
-					onclick={() =>
-						cart.add({
-							productId: product.id,
-							slug: product.slug,
-							name_de: product.name_de,
-							name_en: product.name_en,
-							name_tr: product.name_tr,
-							price: product.price,
-							imageUrl: product.imageUrl
-						})}
-				>
-					{compact ? m.shop_add_to_cart() : '+'}
-				</Button>
 			{/if}
 		</div>
 	</div>
