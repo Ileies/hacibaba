@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		.from(productsTable)
 		.where(and(eq(productsTable.isActive, true)))
 		.orderBy(productsTable.sortOrder)
-		.limit(8)
+		.limit(10)
 		.all()
 		.map((p) => withLocalizedName(parseProductImages(p), locale));
 
