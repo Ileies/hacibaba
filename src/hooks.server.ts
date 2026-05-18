@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { loadCustomerSession, handleAdminAuth } from '$lib/server/auth';
 import { runWithLocale, cookieName } from '$lib/messages';
@@ -90,3 +90,11 @@ const handleSecurity: Handle = async ({ event, resolve }) => {
 };
 
 export const handle = sequence(handleRateLimit, handleAuth, handleLocale, handleSecurity);
+
+export const handleError: HandleServerError = ({ error, event, status, message }) => {
+	if (status !== 404) {
+		console.error(`[error ${status}] ${event.request.method} ${event.url.pathname}`, error);
+	}
+	const stack = error instanceof Error ? error.stack : String(error);
+	return { message: error instanceof Error ? error.message : message, stack };
+};
