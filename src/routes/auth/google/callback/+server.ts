@@ -42,13 +42,18 @@ export const GET: RequestHandler = async (event) => {
 		id: string;
 		email: string;
 		name: string;
+		given_name?: string;
+		family_name?: string;
 	};
+
+	const fullName =
+		[userInfo.given_name, userInfo.family_name].filter(Boolean).join(' ') || userInfo.name;
 
 	const customerId = await findOrCreateOauthCustomer(
 		'google',
 		userInfo.id,
 		userInfo.email,
-		userInfo.name
+		fullName
 	);
 
 	await createCustomerSession(customerId, event);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData, ActionData } from './$types';
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { SvelteSet } from 'svelte/reactivity';
 	import { Button, Separator, Input, Label, Select } from '$lib/components/ui';
@@ -50,7 +51,7 @@
 	let deleting = $state(false);
 	let changingPassword = $state(false);
 	let expandedOrders = new SvelteSet<number>();
-	let activeSection = $state('orders');
+	let activeSection = $state('profile');
 	let showAddressForm = $state(false);
 	let editingAddressId = $state<number | null>(null);
 	let addressFormData = $state({
@@ -67,9 +68,9 @@
 	type Section = 'orders' | 'addresses' | 'profile' | 'security' | 'newsletter' | 'privacy';
 
 	const navItems: { id: Section; label: string; icon: typeof User }[] = [
+		{ id: 'profile', label: 'Profil', icon: User },
 		{ id: 'orders', label: m.shop_my_orders(), icon: Package },
 		{ id: 'addresses', label: m.account_addresses_heading(), icon: MapPin },
-		{ id: 'profile', label: 'Profil', icon: User },
 		{ id: 'security', label: m.account_password_change_heading(), icon: Lock },
 		{ id: 'newsletter', label: m.account_newsletter_heading(), icon: Mail },
 		{ id: 'privacy', label: m.account_export_heading(), icon: Download }
@@ -158,6 +159,9 @@
 				method="POST"
 				use:enhance={() => {
 					cart.clear();
+					return async () => {
+						await goto('/');
+					};
 				}}
 			>
 				<button

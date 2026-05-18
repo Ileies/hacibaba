@@ -8,7 +8,7 @@ import { loginSchema } from '$lib/server/validation';
 import { eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = ({ locals, url }) => {
-	if (locals.customerId) redirect(302, url.searchParams.get('redirectTo') ?? '/account');
+	if (locals.customerId) redirect(302, url.searchParams.get('redirectTo') ?? '/');
 };
 
 export const actions: Actions = {
@@ -37,7 +37,7 @@ export const actions: Actions = {
 
 		await createCustomerSession(customer.id, event);
 
-		const redirectTo = event.url.searchParams.get('redirectTo') ?? '/account';
+		const redirectTo = event.url.searchParams.get('redirectTo') ?? '/';
 		redirect(302, redirectTo);
 	}
 };
