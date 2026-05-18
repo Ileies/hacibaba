@@ -10,7 +10,7 @@
 	import { env } from '$env/dynamic/public';
 	import { untrack } from 'svelte';
 	import { loadStripe } from '@stripe/stripe-js';
-	import type { Stripe, StripeElements, StripePaymentElement } from '@stripe/stripe-js';
+	import type { Stripe, StripePaymentElement, StripeCheckoutElementsSdk } from '@stripe/stripe-js';
 
 	let { data }: { data: PageData } = $props();
 
@@ -54,7 +54,7 @@
 	});
 
 	let stripeInstance: Stripe | null = null;
-	let elementsInstance: StripeElements | null = null;
+	let checkoutSdk: StripeCheckoutElementsSdk | null = null;
 	let paymentElementInstance: StripePaymentElement | null = null;
 	let paymentContainerEl = $state<HTMLDivElement | undefined>(undefined);
 
@@ -201,15 +201,16 @@
 			stripeInstance = await loadStripe(env.PUBLIC_STRIPE_PUBLISHABLE_KEY ?? '');
 			if (!stripeInstance) throw new Error('stripe_load_failed');
 
-			elementsInstance = stripeInstance.elements({
+			checkoutSdk = stripeInstance.initCheckoutElementsSdk({
 				clientSecret: result.clientSecret,
-				locale: 'de',
-				appearance: {
-					theme: 'stripe',
-					variables: { colorPrimary: '#c07030', borderRadius: '0.5rem' }
+				elementsOptions: {
+					appearance: {
+						theme: 'stripe',
+						variables: { colorPrimary: '#c07030', borderRadius: '0.5rem' }
+					}
 				}
 			});
-			paymentElementInstance = elementsInstance.create('payment');
+			paymentElementInstance = checkoutSdk.createPaymentElement();
 
 			step = 'payment';
 			await tick();
@@ -224,26 +225,34 @@
 	}
 
 	async function handlePaymentSubmit() {
-		if (!stripeInstance || !elementsInstance) return;
+		if (!checkoutSdk) return;
 		errors = {};
 		submitting = true;
-		const { error: stripeError } = await stripeInstance.confirmPayment({
-			elements: elementsInstance,
-			confirmParams: {
-				return_url: `${window.location.origin}/checkout/confirmation?order=${orderNumber}`
-			}
-		});
-		if (stripeError) {
-			errors.payment = stripeError.message ?? m.checkout_payment_failed();
+
+		const loadResult = await checkoutSdk.loadActions();
+		if (loadResult.type === 'error') {
+			errors.payment = loadResult.error.message ?? m.checkout_payment_failed();
 			submitting = false;
+			return;
 		}
-		// On success Stripe redirects automatically
+
+		const confirmResult = await loadResult.actions.confirm({
+			returnUrl: `${window.location.origin}/checkout/confirmation?order=${orderNumber}`,
+			redirect: 'if_required'
+		});
+
+		if (confirmResult.type === 'error') {
+			errors.payment = confirmResult.error.message ?? m.checkout_payment_failed();
+			submitting = false;
+		} else {
+			goto(`/checkout/confirmation?order=${orderNumber}`);
+		}
 	}
 
 	function goBackToShipping() {
 		paymentElementInstance?.unmount();
 		paymentElementInstance = null;
-		elementsInstance = null;
+		checkoutSdk = null;
 		stripeInstance = null;
 		orderNumber = '';
 		errors = {};

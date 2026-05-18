@@ -23,33 +23,38 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const now = new Date().toISOString();
 
-	if (event.type === 'payment_intent.succeeded') {
-		const pi = event.data.object as Stripe.PaymentIntent;
-		const order = db
-			.update(ordersTable)
-			.set({
-				paymentStatus: 'paid',
-				status: 'confirmed',
-				paymentMethod: pi.payment_method_types[0] ?? 'card',
-				updatedAt: now
-			})
-			.where(eq(ordersTable.stripePaymentIntentId, pi.id))
-			.returning()
-			.get();
+	if (
+		event.type === 'checkout.session.completed' ||
+		event.type === 'checkout.session.async_payment_succeeded'
+	) {
+		const session = event.data.object as Stripe.Checkout.Session;
+		if (session.payment_status === 'paid') {
+			const order = db
+				.update(ordersTable)
+				.set({
+					paymentStatus: 'paid',
+					status: 'confirmed',
+					paymentMethod: session.payment_method_types?.[0] ?? 'card',
+					updatedAt: now
+				})
+				.where(eq(ordersTable.stripeSessionId, session.id))
+				.returning()
+				.get();
 
-		if (order) {
-			const items = db
-				.select()
-				.from(orderItemsTable)
-				.where(eq(orderItemsTable.orderId, order.id))
-				.all();
-			sendOrderConfirmation(order, items).catch(console.error);
+			if (order) {
+				const items = db
+					.select()
+					.from(orderItemsTable)
+					.where(eq(orderItemsTable.orderId, order.id))
+					.all();
+				sendOrderConfirmation(order, items).catch(console.error);
+			}
 		}
-	} else if (event.type === 'payment_intent.payment_failed') {
-		const pi = event.data.object as Stripe.PaymentIntent;
+	} else if (event.type === 'checkout.session.async_payment_failed') {
+		const session = event.data.object as Stripe.Checkout.Session;
 		db.update(ordersTable)
 			.set({ paymentStatus: 'failed', updatedAt: now })
-			.where(eq(ordersTable.stripePaymentIntentId, pi.id))
+			.where(eq(ordersTable.stripeSessionId, session.id))
 			.run();
 	}
 

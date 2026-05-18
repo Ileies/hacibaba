@@ -2,6 +2,7 @@ import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import Stripe from 'stripe';
 import { env } from '$env/dynamic/private';
+import { env as publicEnv } from '$env/dynamic/public';
 import db from '$lib/server/db';
 import { ordersTable, orderItemsTable } from '$lib/server/schema';
 import { generateOrderNumber } from '$lib/types';
@@ -27,11 +28,34 @@ export const POST: RequestHandler = async ({ request }) => {
 	const orderNumber = generateOrderNumber();
 
 	const stripe = new Stripe(env.STRIPE_SECRET_KEY!);
-	const paymentIntent = await stripe.paymentIntents.create({
-		amount: total,
-		currency: 'eur',
-		receipt_email: customer.email,
-		metadata: { orderNumber }
+
+	const lineItems = items.map((item) => ({
+		price_data: {
+			currency: 'eur',
+			product_data: { name: item.name },
+			unit_amount: item.price
+		},
+		quantity: item.quantity
+	}));
+
+	if (shippingCost > 0) {
+		lineItems.push({
+			price_data: {
+				currency: 'eur',
+				product_data: { name: 'Versand' },
+				unit_amount: shippingCost
+			},
+			quantity: 1
+		});
+	}
+
+	const session = await stripe.checkout.sessions.create({
+		mode: 'payment',
+		ui_mode: 'elements',
+		line_items: lineItems,
+		customer_email: customer.email,
+		metadata: { orderNumber },
+		return_url: `${publicEnv.PUBLIC_SITE_URL}/checkout/confirmation?order=${orderNumber}`
 	});
 
 	const shippingAddress: ShippingAddress = {
@@ -57,7 +81,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			shippingCost,
 			subtotal,
 			total,
-			stripePaymentIntentId: paymentIntent.id
+			stripeSessionId: session.id
 		})
 		.returning({ id: ordersTable.id })
 		.all();
@@ -89,5 +113,5 @@ export const POST: RequestHandler = async ({ request }) => {
 		}))
 	).catch(console.error);
 
-	return json({ clientSecret: paymentIntent.client_secret, orderNumber });
+	return json({ clientSecret: session.client_secret, orderNumber });
 };

@@ -127,6 +127,7 @@ export const ordersTable = sqliteTable(
 		adminNotes: text('admin_notes'),
 		trackingNumber: text('tracking_number'),
 		stripePaymentIntentId: text('stripe_payment_intent_id'),
+		stripeSessionId: text('stripe_session_id'),
 		createdAt: text('created_at')
 			.default(sql`(CURRENT_TIMESTAMP)`)
 			.notNull(),
@@ -138,7 +139,8 @@ export const ordersTable = sqliteTable(
 		index('orders_status_idx').on(table.status),
 		index('orders_created_at_idx').on(table.createdAt),
 		index('orders_customer_idx').on(table.customerId),
-		index('orders_stripe_pi_idx').on(table.stripePaymentIntentId)
+		index('orders_stripe_pi_idx').on(table.stripePaymentIntentId),
+		index('orders_stripe_session_idx').on(table.stripeSessionId)
 	]
 );
 
