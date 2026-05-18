@@ -1,10 +1,9 @@
 import { $ } from 'execa';
-import { access, writeFile } from 'fs/promises';
+import { access, readFile, writeFile } from 'fs/promises';
 
 const APP_NAME = 'hacibaba';
 const SSH_HOST = process.env.DEPLOY_SSH_HOST ?? 'hosting230274@hacibaba1988.de';
 const REMOTE_DIR = process.env.DEPLOY_REMOTE_DIR ?? '/hacibaba1988.de';
-const ENV_FILE = process.env.DEPLOY_ENV_FILE ?? '.env';
 const BUILD_DIR = process.env.DEPLOY_BUILD_DIR ?? 'build';
 const LOCAL_ARCHIVE = `./${APP_NAME}-build.tar.gz`;
 const REMOTE_ARCHIVE = `/tmp/${APP_NAME}-build.tar.gz`;
@@ -17,7 +16,6 @@ function quote(value: string) {
 function validateConfig() {
 	if (!SSH_HOST.trim()) throw new Error('DEPLOY_SSH_HOST is empty');
 	if (!REMOTE_DIR.trim() || REMOTE_DIR === '/') throw new Error('DEPLOY_REMOTE_DIR is unsafe');
-	if (!ENV_FILE.trim()) throw new Error('DEPLOY_ENV_FILE is empty');
 }
 
 async function assertFileExists(path: string, label: string) {
@@ -35,16 +33,16 @@ async function remote(command: string) {
 try {
 	validateConfig();
 	await assertFileExists(`${BUILD_DIR}/index.js`, 'Build output');
-	await assertFileExists(ENV_FILE, 'Environment file');
 
 	console.log('Preparing build directory...');
 	await writeFile(
 		`${BUILD_DIR}/app.js`,
 		"try { process.loadEnvFile('.env'); } catch {}\nimport('./index.js');\n"
 	);
+	const rootPkg = JSON.parse(await readFile('package.json', 'utf-8'));
 	await writeFile(
 		`${BUILD_DIR}/package.json`,
-		JSON.stringify({ type: 'module', dependencies: { 'better-sqlite3': '>=12' } }, null, 2) + '\n'
+		JSON.stringify({ type: 'module', dependencies: rootPkg.dependencies }, null, 2) + '\n'
 	);
 
 	const SERVER_NODE_VERSION = process.env.DEPLOY_NODE_VERSION ?? '25.9.0';
@@ -98,7 +96,7 @@ try {
 	);
 
 	console.log('Uploading environment file...');
-	await $`scp ${ENV_FILE} ${SSH_HOST}:${REMOTE_DIR}/.env`;
+	await $`scp .env ${SSH_HOST}:${REMOTE_DIR}/.env`;
 
 	console.log('Cleaning up temporary files...');
 	await remote(`rm -rf ${quote(REMOTE_ARCHIVE)} ${quote(REMOTE_BACKUP_DIR)}`);

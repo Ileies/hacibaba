@@ -110,9 +110,9 @@
 		<Input
 			id="imageUrl"
 			name="imageUrl"
-			type="url"
+			type="text"
 			value={data.product?.imageUrl ?? ''}
-			placeholder="https://..."
+			placeholder="https://... oder /uploads/bild.jpg"
 		/>
 	</div>
 

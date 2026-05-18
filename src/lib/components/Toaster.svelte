@@ -4,7 +4,7 @@
 	import { CheckCircle, XCircle, Info, X } from 'lucide-svelte';
 </script>
 
-<div class="pointer-events-none fixed bottom-4 right-4 z-[100] flex w-full max-w-sm flex-col gap-2">
+<div class="pointer-events-none fixed right-4 bottom-4 z-[100] flex w-full max-w-sm flex-col gap-2">
 	{#each toasts.items as toast (toast.id)}
 		<div
 			transition:fly={{ x: 80, duration: 200 }}
