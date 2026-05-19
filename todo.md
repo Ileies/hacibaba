@@ -12,6 +12,8 @@ Stundensatz: **gestaffelt nach Feature-Typ** — günstige Pflichtfeatures damit
 Preistag `0 €` = gesetzliche Pflicht oder technische Grundvoraussetzung.
 Schätzungen gelten für **KI-gestützte Entwicklung**. Reine Redaktions- oder Design-Arbeit ist gesondert gekennzeichnet.
 
+> **Hinweis fur Claude:** Eigeninitiativ werden nur noch To-Dos des Typs **Standard** umgesetzt. Alle anderen Typen (Basis, Wachstum, Premium) werden ausschliesslich bearbeitet, wenn der Nutzer sie explizit beim Namen nennt - niemals einfach so.
+
 ---
 
 ## I. Gesetzliche Pflichten
