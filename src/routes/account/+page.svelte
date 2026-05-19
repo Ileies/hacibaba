@@ -16,10 +16,11 @@
 		ExternalLink,
 		LogOut,
 		ChevronRight,
-		MapPin
+		MapPin,
+		RotateCcw
 	} from 'lucide-svelte';
 	import * as m from '$lib/messages';
-	import { cart } from '$lib/states.svelte';
+	import { cart, toasts } from '$lib/states.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -223,6 +224,7 @@
 										</div>
 									</button>
 									{#if expandedOrders.has(order.id)}
+										{@const reorderableItems = order.items.filter((i) => i.productId != null)}
 										<div class="border-border border-t px-4 pb-4">
 											<div class="space-y-1.5 pt-3">
 												<div
@@ -266,17 +268,37 @@
 													<span>{formatPrice(order.total)}</span>
 												</div>
 											</div>
+											<div class="mt-3 flex items-center gap-4">
 											{#if order.trackingNumber}
 												<a
 													href="https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?idc={order.trackingNumber}"
 													target="_blank"
 													rel="noopener noreferrer"
-													class="text-primary mt-3 inline-flex cursor-pointer items-center gap-1.5 text-xs hover:underline"
+													class="text-primary inline-flex cursor-pointer items-center gap-1.5 text-xs hover:underline"
 												>
 													<ExternalLink size={12} />
 													{m.account_order_track()} ({order.trackingNumber})
 												</a>
 											{/if}
+											{#if reorderableItems.length > 0}
+												<button
+													type="button"
+													onclick={async () => {
+														await cart.reorder(
+															reorderableItems.map((i) => ({
+																productId: i.productId!,
+																quantity: i.quantity
+															}))
+														);
+														toasts.add(m.account_reorder_added(), 'success');
+													}}
+													class="text-primary inline-flex cursor-pointer items-center gap-1.5 text-xs hover:underline"
+												>
+													<RotateCcw size={12} />
+													{m.account_reorder()}
+												</button>
+											{/if}
+										</div>
 										</div>
 									{/if}
 								</div>

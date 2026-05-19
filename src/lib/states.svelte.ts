@@ -1,5 +1,10 @@
 import type { CartItem } from '$lib/types';
-import { type PersistedCartLine, parsePersistedLines, fingerprint } from '$lib/cart-lines';
+import {
+	type PersistedCartLine,
+	parsePersistedLines,
+	fingerprint,
+	mergeLinesByProductId
+} from '$lib/cart-lines';
 
 function readLinesFromLocalStorage(): PersistedCartLine[] | null {
 	if (typeof window === 'undefined') return null;
@@ -142,6 +147,15 @@ class CartStore {
 	clear(): void {
 		this.items = [];
 		this.persist();
+	}
+
+	reorder(lines: { productId: number; quantity: number }[]): Promise<void> {
+		if (typeof window === 'undefined') return Promise.resolve();
+		const existing = readLinesFromLocalStorage() ?? [];
+		const merged = mergeLinesByProductId([...existing, ...lines]);
+		localStorage.setItem('cart', JSON.stringify(merged));
+		this.hydratePromise = null;
+		return this.load();
 	}
 
 	private persist(): void {

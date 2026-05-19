@@ -380,6 +380,12 @@
 	"account_newsletter_unsubscribe_btn": ["Abbestellen", "Unsubscribe", "Aboneliği iptal et"],
 	"account_order_details": ["Bestelldetails", "Order details", "Sipariş detayları"],
 	"account_order_track": ["Sendung verfolgen", "Track shipment", "Kargo takibi"],
+	"account_reorder": ["Nochmals bestellen", "Order again", "Tekrar sipariş ver"],
+	"account_reorder_added": [
+		"Artikel in den Warenkorb gelegt.",
+		"Items added to cart.",
+		"Ürünler sepete eklendi."
+	],
 	"shop_gift_message": [
 		"Persönliche Nachricht / Geschenkbotschaft",
 		"Personal message / gift note",
