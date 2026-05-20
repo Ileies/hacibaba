@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 	import { formatPrice, localizedName } from '$lib/types';
 	import { Button, Separator } from '$lib/components/ui';
-	import { Trash2 } from 'lucide-svelte';
+	import { Trash2 } from '@lucide/svelte';
 	import * as m from '$lib/messages';
 	import { env } from '$env/dynamic/public';
 

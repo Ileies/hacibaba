@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import ProductCard from '$lib/components/ProductCard.svelte';
-	import { Search, SlidersHorizontal, X } from 'lucide-svelte';
+	import { Search, SlidersHorizontal, X } from '@lucide/svelte';
 	import { PRODUCT_TAGS } from '$lib/types';
 	import * as m from '$lib/messages';
 	import { goto } from '$app/navigation';

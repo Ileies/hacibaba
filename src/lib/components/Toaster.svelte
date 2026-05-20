@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toasts } from '$lib/states.svelte';
 	import { fly } from 'svelte/transition';
-	import { CheckCircle, XCircle, Info, X } from 'lucide-svelte';
+	import { CheckCircle, XCircle, Info, X } from '@lucide/svelte';
 </script>
 
 <div class="pointer-events-none fixed right-4 bottom-4 z-[100] flex w-full max-w-sm flex-col gap-2">

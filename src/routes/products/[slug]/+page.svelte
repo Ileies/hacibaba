@@ -3,7 +3,7 @@
 	import { formatPrice, activeAllergens, activeTags } from '$lib/types';
 	import { cart } from '$lib/states.svelte';
 	import { Button, Badge, Separator } from '$lib/components/ui';
-	import { ShoppingCart } from 'lucide-svelte';
+	import { ShoppingCart } from '@lucide/svelte';
 	import Breadcrumb from '$lib/components/Breadcrumb.svelte';
 	import { untrack } from 'svelte';
 	import * as m from '$lib/messages';

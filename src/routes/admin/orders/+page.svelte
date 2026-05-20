@@ -12,7 +12,7 @@
 		TableCell
 	} from '$lib/components/ui';
 	import StatusBadge from '$lib/components/StatusBadge.svelte';
-	import { Download } from 'lucide-svelte';
+	import { Download } from '@lucide/svelte';
 	import * as m from '$lib/messages';
 
 	let { data }: { data: PageData } = $props();

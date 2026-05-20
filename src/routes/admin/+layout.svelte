@@ -8,7 +8,7 @@
 		ExternalLink,
 		Users,
 		Star
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 	import * as m from '$lib/messages';
 
 	let { children }: { children: Snippet } = $props();

@@ -11,7 +11,7 @@
 		TableHead,
 		TableCell
 	} from '$lib/components/ui';
-	import { Plus, Pencil } from 'lucide-svelte';
+	import { Plus, Pencil } from '@lucide/svelte';
 	import * as m from '$lib/messages';
 
 	let { data }: { data: PageData } = $props();

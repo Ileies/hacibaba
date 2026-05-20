@@ -18,7 +18,7 @@
 		ChevronRight,
 		MapPin,
 		RotateCcw
-	} from 'lucide-svelte';
+	} from '@lucide/svelte';
 	import * as m from '$lib/messages';
 	import { cart, toasts } from '$lib/states.svelte';
 

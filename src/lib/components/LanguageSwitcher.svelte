@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Globe, Check } from 'lucide-svelte';
+	import { Globe, Check } from '@lucide/svelte';
 	import { cn } from '$lib/utils';
 
 	let { locale, variant = 'dropdown' }: { locale: string; variant?: 'dropdown' | 'inline' } =

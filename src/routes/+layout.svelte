@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { ShoppingCart, User, Search, ArrowUp, MessageCircle, Menu, X } from 'lucide-svelte';
+	import { ShoppingCart, User, Search, ArrowUp, MessageCircle, Menu, X } from '@lucide/svelte';
 	import { cart } from '$lib/states.svelte';
 	import { Button } from '$lib/components/ui';
 	import Toaster from '$lib/components/Toaster.svelte';
