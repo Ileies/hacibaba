@@ -56,7 +56,7 @@ export const actions: Actions = {
 		const storageEn = String(data.get('storage_en') ?? '').trim() || null;
 		const storageTr = String(data.get('storage_tr') ?? '').trim() || null;
 
-		// Nutrition per 100g — store as JSON, omit if all fields empty
+		// Nutrition per 100g - store as JSON, omit if all fields empty
 		const nutritionFields = {
 			energy_kj: parseOptionalFloat(data.get('nutrition_energy_kj')),
 			energy_kcal: parseOptionalFloat(data.get('nutrition_energy_kcal')),

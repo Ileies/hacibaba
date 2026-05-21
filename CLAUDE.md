@@ -281,7 +281,7 @@ SMTP_FROM                        # Sender address, e.g. "Hacibaba <info@hacibaba
 - **Svelte 5 runes** (`$state`, `$derived`, `$effect`, `$props`) throughout.
 - **Imports:** Use `$lib/` aliases, not relative paths from `src/`.
 - **Prices:** Always integers in EUR cents. Never floats for money.
-- **No em dashes:** Use regular hyphens (`-`). Em dashes (`—`) break tool-based text matching.
+- **No em dashes:** Use regular hyphens (`-`). Em dashes (`-`) break tool-based text matching.
 - **Language:** Variable names, function names, comments, type fields in English. User-facing UI text in German.
 - **Formatting:** Prettier + ESLint. Run `bun run format` before committing.
 
