@@ -1,29 +1,14 @@
 import { $ } from 'execa';
 import { access, readFile, writeFile } from 'fs/promises';
 
-const APP_NAME = 'hacibaba';
-const SSH_HOST = process.env.DEPLOY_SSH_HOST ?? 'hosting230274@hacibaba1988.de';
-const REMOTE_DIR = process.env.DEPLOY_REMOTE_DIR ?? '/hacibaba1988.de';
-const BUILD_DIR = process.env.DEPLOY_BUILD_DIR ?? 'build';
-const LOCAL_ARCHIVE = `./${APP_NAME}-build.tar.gz`;
-const REMOTE_ARCHIVE = `/tmp/${APP_NAME}-build.tar.gz`;
-const REMOTE_BACKUP_DIR = `/tmp/${APP_NAME}-deploy-backup`;
-
-function quote(value: string) {
-	return `'${value.replaceAll("'", "'\\''")}'`;
-}
+const SSH_HOST = 'hosting230274@hacibaba1988.de';
+const REMOTE_DIR = '/hacibaba1988.de';
+const LOCAL_ARCHIVE = `./hacibaba-build.tar.gz`;
+const REMOTE_ARCHIVE = `/tmp/hacibaba-build.tar.gz`;
 
 function validateConfig() {
 	if (!SSH_HOST.trim()) throw new Error('DEPLOY_SSH_HOST is empty');
 	if (!REMOTE_DIR.trim() || REMOTE_DIR === '/') throw new Error('DEPLOY_REMOTE_DIR is unsafe');
-}
-
-async function assertFileExists(path: string, label: string) {
-	try {
-		await access(path);
-	} catch {
-		throw new Error(`${label} not found at ${path}`);
-	}
 }
 
 async function remote(command: string) {
@@ -32,24 +17,29 @@ async function remote(command: string) {
 
 try {
 	validateConfig();
-	await assertFileExists(`${BUILD_DIR}/index.js`, 'Build output');
+
+	try {
+		await access('build/index.js');
+	} catch {
+		throw new Error(`Build output not found at build/index.js`);
+	}
 
 	console.log('Preparing build directory...');
 	await writeFile(
-		`${BUILD_DIR}/app.js`,
+		`build/app.js`,
 		"try { process.loadEnvFile('.env'); } catch {}\nimport('./index.js');\n"
 	);
 	const rootPkg = JSON.parse(await readFile('package.json', 'utf-8'));
 	await writeFile(
-		`${BUILD_DIR}/package.json`,
+		`build/package.json`,
 		JSON.stringify({ type: 'module', dependencies: rootPkg.dependencies }, null, 2) + '\n'
 	);
 
-	const SERVER_NODE_VERSION = process.env.DEPLOY_NODE_VERSION ?? '25.9.0';
+	const SERVER_NODE_VERSION = '25.9.0';
 
 	console.log('Installing native dependencies...');
 	await $({
-		cwd: BUILD_DIR,
+		cwd: 'build',
 		env: {
 			...process.env,
 			npm_config_platform: 'linux',
@@ -59,53 +49,27 @@ try {
 	})`npm install --omit=dev`;
 
 	console.log('Compressing build directory...');
-	await $`tar -czf ${LOCAL_ARCHIVE} -C ${BUILD_DIR} .`;
+	await $`tar -czf ${LOCAL_ARCHIVE} -C build .`;
 
 	console.log('Uploading compressed build...');
 	await $`scp ${LOCAL_ARCHIVE} ${SSH_HOST}:${REMOTE_ARCHIVE}`;
 
-	console.log('Saving database...');
-	await remote(
-		`rm -rf ${quote(REMOTE_BACKUP_DIR)} && mkdir -p ${quote(REMOTE_DIR)} ${quote(REMOTE_BACKUP_DIR)}`
-	);
-	await remote(
-		`for file in db.sqlite db.sqlite-wal db.sqlite-shm; do if [ -e ${quote(REMOTE_DIR)}/"$file" ]; then cp ${quote(REMOTE_DIR)}/"$file" ${quote(REMOTE_BACKUP_DIR)}/"$file"; fi; done`
-	);
-
-	console.log('Saving backups directory...');
-	await remote(
-		`rm -rf ${quote(REMOTE_BACKUP_DIR)}/backups && if [ -d ${quote(REMOTE_DIR)}/backups ]; then cp -r ${quote(REMOTE_DIR)}/backups ${quote(REMOTE_BACKUP_DIR)}/backups; fi`
-	);
-
 	console.log('Cleaning remote directory...');
-	await remote(
-		`find ${quote(REMOTE_DIR)} -mindepth 1 -maxdepth 1 ! -name backups -exec rm -rf {} +`
-	);
+	await remote(`mkdir -p ${REMOTE_DIR}`);
+	await remote(`find ${REMOTE_DIR} -mindepth 1 -maxdepth 1 ! -name data -exec rm -rf {} +`);
 
 	console.log('Extracting build on server...');
-	await remote(`tar -xzf ${quote(REMOTE_ARCHIVE)} -C ${quote(REMOTE_DIR)}`);
-
-	console.log('Restoring database...');
-	await remote(
-		`for file in db.sqlite db.sqlite-wal db.sqlite-shm; do if [ -e ${quote(REMOTE_BACKUP_DIR)}/"$file" ]; then mv ${quote(REMOTE_BACKUP_DIR)}/"$file" ${quote(REMOTE_DIR)}/"$file"; fi; done`
-	);
-
-	console.log('Restoring backups directory...');
-	await remote(
-		`if [ -d ${quote(REMOTE_BACKUP_DIR)}/backups ]; then rm -rf ${quote(REMOTE_DIR)}/backups && mv ${quote(REMOTE_BACKUP_DIR)}/backups ${quote(REMOTE_DIR)}/backups; fi`
-	);
+	await remote(`tar -xzf ${REMOTE_ARCHIVE} -C ${REMOTE_DIR}`);
 
 	console.log('Uploading environment file...');
 	await $`scp .env ${SSH_HOST}:${REMOTE_DIR}/.env`;
 
 	console.log('Cleaning up temporary files...');
-	await remote(`rm -rf ${quote(REMOTE_ARCHIVE)} ${quote(REMOTE_BACKUP_DIR)}`);
+	await remote(`rm -f ${REMOTE_ARCHIVE}`);
 	await $`rm -f ${LOCAL_ARCHIVE}`;
 
 	console.log('Restarting application...');
-	await remote(
-		`mkdir -p ${quote(REMOTE_DIR + '/tmp')} && touch ${quote(REMOTE_DIR + '/tmp/restart.txt')}`
-	);
+	await remote(`mkdir -p ${REMOTE_DIR + '/tmp'} && touch ${REMOTE_DIR + '/tmp/restart.txt'}`);
 
 	console.log('Deployment completed successfully!');
 } catch (error) {

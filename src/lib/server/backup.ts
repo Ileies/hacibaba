@@ -1,8 +1,9 @@
 import { unlink, readdir, mkdir, copyFile } from 'fs/promises';
 import { join } from 'path';
 
-const DB_PATH = process.env.DB_PATH ?? join(process.cwd(), 'db.sqlite');
-const BACKUPS_DIR = join(process.cwd(), 'backups');
+const DATA_DIR = join(process.cwd(), 'data');
+const DB_PATH = join(DATA_DIR, 'db.sqlite');
+const BACKUPS_DIR = join(DATA_DIR, 'backups');
 const MAX_BACKUPS = 10;
 const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
@@ -33,7 +34,7 @@ export async function backupDatabase() {
 	const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
 	const dest = join(BACKUPS_DIR, `db-${timestamp}.sqlite`);
 	await copyFile(DB_PATH, dest);
-	console.log(`[backup] Database backed up to backups/db-${timestamp}.sqlite`);
+	console.log(`[backup] Database backed up to ${dest}`);
 
 	const entries = await readdir(BACKUPS_DIR);
 	const files = entries.filter((f) => /^db-.*\.sqlite$/.test(f)).sort();

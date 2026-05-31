@@ -18,7 +18,7 @@ bun run preview                      # Preview production build
 bun run check                        # Type-check (svelte-check + tsc)
 bun run lint                         # Prettier check + ESLint
 bun run format                       # Auto-format with Prettier
-bun run drizzle:push                 # Push schema changes to db.sqlite
+bun run drizzle:push                 # Push schema changes to data/db.sqlite
 ```
 
 Production: `bun build/index.js`
@@ -108,7 +108,7 @@ Feature-Backlog and price calculation: `todo.md` in project root
 ## Database
 
 - **ORM:** Drizzle ORM with SQLite (`better-sqlite3`)
-- **File:** `db.sqlite` at project root (relative path - run commands from project root)
+- **File:** `data/db.sqlite` relative to project root
 - **Schema:** `src/lib/server/schema.ts` - edit here, then `bun run drizzle:push`
 - **Tables:** `products`, `customers`, `customer_sessions`, `oauth_accounts`, `admin_sessions`, `orders`, `order_items`, `newsletter_subscribers`, `password_reset_tokens`
 - **Booleans:** Stored as integers (0/1).
@@ -237,7 +237,7 @@ This prints a `whsec_...` signing secret - use it as `STRIPE_WEBHOOK_SECRET` in 
 
 ## Auto-backup
 
-On startup and every 24h, `db.sqlite` is copied to `backups/db-<timestamp>.sqlite`. Rolling 10-file limit. `backups/` is git-ignored.
+On startup and every 24h, `data/db.sqlite` is copied to `data/backups/db-<timestamp>.sqlite`. Rolling 10-file limit.
 
 ## Email
 
@@ -289,5 +289,5 @@ SMTP_FROM                        # Sender address, e.g. "Hacibaba <info@hacibaba
 
 - `messages.ts` is auto-generated - run `bun run dev` once to generate it before `bun run check` works.
 - `products.images`, `products.nutrition`, and `orders.shippingAddress`/`billingAddress` are JSON strings - parse on read. Use `parseProductData()` from `$lib/server/queries` for products.
-- `db.sqlite` path is relative - always run commands from the project root.
+- Database is at `data/db.sqlite` (relative to project root) - ensure the `data/` directory exists and is writable.
 - Cart state lives only in the browser (localStorage). Server-side renders don't have cart data.
